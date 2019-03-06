@@ -1,14 +1,16 @@
 // var socket = io.connect('http://localhost:8080')
 var canvas = document.getElementById('canvas'),
-    ctx = canvas.getContext('2d'),
-    drawing = false,
-    prev = {x: 0, y: 0}
+ctx = canvas.getContext('2d'),
+drawing = false
+var clickX = [],
+clickY = [],
+clickDrag = []
 
 canvas.onmousedown = function(e) {
     e.preventDefault()
     drawing = true
-    prev.x = e.pageX
-    prev.y = e.pageY
+    addClick(e.pageX-canvas.offsetLeft,e.pageY-canvas.offsetTop)
+    redraw()
 }
 
 document.onmouseup = function(e) {
@@ -28,15 +30,33 @@ canvas.onblur = function(e) {
 
 document.onmousemove = function (e) {
     if(drawing){
-        drawLine(prev, {x: e.pageX, y: e.pageY});
-        prev.x = e.pageX;
-        prev.y = e.pageY;
+        addClick(e.pageX-canvas.offsetLeft,e.pageY-canvas.offsetTop, true)
+        redraw()
     }
 }
 
-function drawLine(prev, current){
-    ctx.beginPath()
-    ctx.moveTo(prev.x, prev.y)
-    ctx.lineTo(current.x, current.y)
-    ctx.stroke()
+function addClick (x, y, dragging) {
+    clickX.push(x)
+    clickY.push(y)
+    clickDrag.push(dragging)
+}
+
+function redraw() {
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); // Clears the canvas
+  
+    ctx.strokeStyle = "#df4b26";
+    ctx.lineJoin = "round";
+    ctx.lineWidth = 5;
+			
+    for(var i=0; i < clickX.length; i++) {		
+        ctx.beginPath();
+        if(clickDrag[i] && i){
+            ctx.moveTo(clickX[i-1], clickY[i-1]);
+        }else{
+            ctx.moveTo(clickX[i]-1, clickY[i]);
+        }
+        ctx.lineTo(clickX[i], clickY[i]);
+        ctx.closePath();
+        ctx.stroke();
+    }
 }

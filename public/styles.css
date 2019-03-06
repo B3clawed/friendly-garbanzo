@@ -1,0 +1,11 @@
+body {
+    background-color: coral;
+}
+
+canvas {
+    background-color: white;
+    padding: 0;
+    margin: auto;
+    display: block;
+    width: 800px;
+}

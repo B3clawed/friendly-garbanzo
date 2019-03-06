@@ -1,0 +1,22 @@
+{
+  "name": "friendly-garbanzo",
+  "version": "1.0.0",
+  "description": "Once upon a time, a garbanzo bean was friendly. The end.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/B3clawed/friendly-garbanzo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/B3clawed/friendly-garbanzo/issues"
+  },
+  "homepage": "https://github.com/B3clawed/friendly-garbanzo#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}

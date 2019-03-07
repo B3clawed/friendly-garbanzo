@@ -1,4 +1,4 @@
-// var socket = io.connect('http://localhost:8080')
+var socket = io.connect('http://localhost:3000')
 var canvas = document.getElementById('canvas'),
 ctx = canvas.getContext('2d'),
 drawing = false

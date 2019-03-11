@@ -8,6 +8,6 @@ const gameServer = require('./gameServer')
 
 app.use("/", express.static(path.join(__dirname, 'public')))
 
-server.listen(port, () => console.log(`Friendly garbanzo is listening on port ${port}`))
+server.listen(port, '127.0.0.1', () => console.log(`Friendly garbanzo is listening on port ${port}`))
 
 new gameServer(io)

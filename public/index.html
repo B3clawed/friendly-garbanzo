@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="/styles.css" />
     </head>
 
-    <body>
+    <body style='text-align: center'>
         <div id="cursors">
         </div>
 
@@ -16,10 +16,28 @@
             Your browser needs to support canvas for this to work!
         </canvas>
 
+        <input type="text" name="userName" value=""></input>
+        <button type="button" onclick="addPlayer()" >Click Me!</button>
+
+        <table style="width:10%">
+            <tr>
+              <td id="1"></td>
+            </tr>
+            <tr>
+              <th>Points</th>
+            </tr>
+          </table>
+            
+
         <!-- JavaScript includes. Notice that socket.io.js is served by node.js -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
         <script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
         <script src="/game.js"></script>
+        <script>
+            function myFunction() {
+              console.log(document.getElementByName('userName').value)
+            }
+            </script>
 
     </body>
 </html>

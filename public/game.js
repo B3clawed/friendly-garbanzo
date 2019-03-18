@@ -1,4 +1,4 @@
-var socket = io.connect('http://576cafa5.ngrok.io'),
+var socket = io.connect('http://127.0.0.1:3000'),
     canvas = document.getElementById('canvas'),
     ctx = canvas.getContext('2d'),
     drawing = false

@@ -1,6 +1,9 @@
 module.exports = class gameServer{
     constructor(io){
         this.io = io
+        this.gameSettings = {
+            timer: 60
+        }
         this.players = {}
 
         io.on('connection', (socket) => {
@@ -9,12 +12,16 @@ module.exports = class gameServer{
             this.addPlayer({socket: socket, name: 'Banana'}, (player) => {
                 io.emit('playerdata', this.players)
                 socket.emit('hello', player)
+                // if(Object.keys(this.players).length >= 2){}
             })
-
 
             socket.once('disconnect', () => {
                 delete this.players[socket.id]
                 io.emit('playerdata', this.players)
+            })
+
+            socket.on('chooseword', (data) => {
+                this.startTurn(socket, data.id)
             })
 
             socket.on('drawdata', (data) => {
@@ -31,10 +38,18 @@ module.exports = class gameServer{
             this.players[data.socket.id] = {
                 id: data.socket.id,
                 name: data.name,
-                turn: Object.keys(this.players).length == 0 ? true : false,
+                turn: false,
                 color: '#00ff00',
                 drawData: []
             }
         )
+    }
+
+    startTurn(socket, wordId){
+        socket.broadcast.emit('startturn', {id: socket.id})
+        setTimeout(() => {
+            this.players[socket.id].turn = false
+            this.io.emit('endturn', {id: socket.id})
+        }, this.gameSettings.timer * 1000)
     }
 }

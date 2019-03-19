@@ -8,7 +8,9 @@ canvas {
     margin: auto;
     display: block;
     width: 800px;
-    cursor: crosshair
+    cursor: crosshair;
+    margin-right: 2%;
+    float: right;
 }
 
 circle {
@@ -16,5 +18,24 @@ circle {
     width: 50px;
     background-color: #555;
     border-radius: 50%;
+  }
+
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 300px;
+    margin-top: 15px;
+    height: 500px;
+}
+  
+  tr {
+    border: 2px solid #ddd;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+  .userInput {
+      margin-left: 0px;
   }
   

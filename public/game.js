@@ -1,3 +1,4 @@
+
 var socket = io.connect('http://127.0.0.1:3000'),
     canvas = document.getElementById('canvas'),
     ctx = canvas.getContext('2d'),
@@ -6,7 +7,8 @@ var clickX = [],
     clickY = [],
     clickDrag = [],
     playerData = {},
-    self = {}
+    self = {},
+    players = []
 
 socket.on('drawdata', (data) => {
     playerData[data.id].drawData.push(data)
@@ -71,7 +73,9 @@ function main() {
 
 function addPlayer() {
     var name = document.getElementsByName("userName")[0].value
-    console.log(name)
+    document.getElementsByName("userName")[0].value = ""
+    players.push(name)
+    document.getElementById(players.length).innerHTML = name    
 }
 
  

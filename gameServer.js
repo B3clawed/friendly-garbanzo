@@ -8,11 +8,14 @@ module.exports = class gameServer{
 
         io.on('connection', (socket) => {
             console.log(`Client ${socket.id} connected`)
+            //console.log(socket.handshake.query)
 
-            this.addPlayer({socket: socket, name: 'Banana'}, (player) => {
-                io.emit('playerdata', this.players)
-                socket.emit('hello', player)
-                // if(Object.keys(this.players).length >= 2){}
+            socket.on('login', (data) => {
+                this.addPlayer({socket: socket, name: data.name}, (player) => {
+                    io.emit('playerdata', this.players)
+                    socket.emit('hello', player)
+                    // if(Object.keys(this.players).length >= 2){}
+                })
             })
 
             socket.once('disconnect', () => {
@@ -38,7 +41,7 @@ module.exports = class gameServer{
             this.players[data.socket.id] = {
                 id: data.socket.id,
                 name: data.name,
-                turn: false,
+                turn: Object.keys(this.players).length == 0 ? true : false,
                 color: '#00ff00',
                 drawData: []
             }

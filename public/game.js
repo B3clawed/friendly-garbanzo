@@ -1,5 +1,5 @@
 
-var socket = io.connect('http://127.0.0.1:3000'),
+var socket,
     canvas = document.getElementById('canvas'),
     ctx = canvas.getContext('2d'),
     drawing = false
@@ -9,27 +9,6 @@ var clickX = [],
     playerData = {},
     self = {},
     players = []
-
-socket.on('drawdata', (data) => {
-    playerData[data.id].drawData.push(data)
-})
-
-socket.on('clearCanvas', ()=>{
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-})
-
-socket.on('playerdata', (players) => {
-    playerData = players
-    delete playerData[self.id]
-})
-
-socket.on('hello', (data) => {
-    self = data
-})
-
-socket.on('connect', () => {
-})
-
 
 canvas.onmousedown = function(e) {
     e.preventDefault()
@@ -71,11 +50,50 @@ function main() {
     requestAnimationFrame(main)
 }
 
-function addPlayer() {
+function setPlayers() {
+    for(let i=1; i<=10; i++){
+        document.getElementById(i).innerHTML = ''
+    }
+
+    let count = 1
+    for(let id in playerData){
+        let plr = playerData[id]
+        document.getElementById(count).innerHTML = plr.name
+        count++
+    }
+}
+
+function connect() {
     var name = document.getElementsByName("userName")[0].value
     document.getElementsByName("userName")[0].value = ""
     players.push(name)
-    document.getElementById(players.length).innerHTML = name    
+    document.getElementById(players.length).innerHTML = name
+
+    socket = io.connect('http://127.0.0.1:3000')
+    socket.emit('login', {name: name})
+
+    socket.on('drawdata', (data) => {
+        playerData[data.id].drawData.push(data)
+    })
+    
+    socket.on('clearCanvas', ()=>{
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    })
+    
+    socket.on('playerdata', (players) => {
+        playerData = players
+        setPlayers()
+    })
+    
+    socket.on('hello', (data) => {
+        self = data
+    })
+    
+    socket.on('connect', () => {
+    })
+
+    document.getElementsByName("userName")[0].remove()
+    document.getElementById('login').remove()
 }
 
  

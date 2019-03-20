@@ -1,41 +1,57 @@
 body {
-    background-color: coral;
+    background-color: #ffa64d;
+}
+
+.userInput {
+  float: left;
+  width: 200px;
+}
+
+.userButton {
+  float: left;
+  width: 100px;
 }
 
 canvas {
-    background-color: white;
-    padding: 0;
-    margin: auto;
-    display: block;
-    width: 800px;
-    cursor: crosshair;
-    margin-right: 2%;
+  background-color: white;
+  display: absolute;
+  cursor: crosshair;
+  float: left;
+  margin-left: 50px;
+}
+
+table {
+  display: none;
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 300px;
+  margin-top: 15px;
+  height: 500px;
+  float: left;
+}
+  
+tr {
+  border: 2px solid #ddd;
+}
+  
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.container {
+  width: 400px;
+  height: 700px;
+  float: right;
+  border: 2px solid #ddd;
+  top: 600
+}
+
+.chatInput {
+    position: relative;
+    width: 400px;
+    top: 700px;
+    height: 25px;
     float: right;
-}
-
-circle {
-    height: 50px;
-    width: 50px;
-    background-color: #555;
-    border-radius: 50%;
-  }
-
-  table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 300px;
-    margin-top: 15px;
-    height: 500px;
-}
-  
-  tr {
     border: 2px solid #ddd;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #dddddd;
-  }
-  .userInput {
-      margin-left: 0px;
-  }
+}
   

@@ -7,19 +7,11 @@
         <link rel="stylesheet" href="/styles.css" />
     </head>
 
-    <body style='text-align: center'>
-        <div id="cursors">
-        </div>
-
-        <div id="circle"></div>
-        <canvas id="canvas" width="800" height="600">
-            Your browser needs to support canvas for this to work!
-        </canvas>
-
-        <input class="userInput" type="text" name="userName" value=""></input>
-        <button class="userInput" id="login" type="button" onclick="connect()" >Click Me!</button>
-
-        <table>
+    <body>
+        <!---<input class="userInput" type="text" name="userName" value=""></input>--->
+        <!---<button class="userButton" id="login" type="button" onclick="connect()" >Click Me!</button>--->
+        
+        <table id="table">
           <tr id="1"></tr>
           <tr id="2"></tr>
           <tr id="3"></tr>
@@ -30,22 +22,23 @@
           <tr id="8"></tr>
           <tr id="9"></tr>
           <tr id="10"></tr>
+        </table> 
 
-            <!-- <tr>
-              <th>Points</th>
-            </tr> -->
-          </table>
+        <canvas id="canvas" width="800" height="600">
+            Your browser needs to support canvas for this to work!
+        </canvas>
+
+        <div class="container"><input class="chatInput" type="text" value=""></input></div>
+        
+
+        
             
 
         <!-- JavaScript includes. Notice that socket.io.js is served by node.js -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
         <script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
         <script src="/game.js"></script>
-        <script>
-            function myFunction() {
-              console.log(document.getElementByName('userName').value)
-            }
-            </script>
+
 
     </body>
 </html>

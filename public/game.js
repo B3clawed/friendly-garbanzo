@@ -82,6 +82,7 @@ function connect() {
     
     socket.on('playerdata', (players) => {
         playerData = players
+        self = players[self.id]
         setPlayers()
     })
     

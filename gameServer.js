@@ -12,9 +12,10 @@ module.exports = class gameServer{
 
             socket.on('login', (data) => {
                 this.addPlayer({socket: socket, name: data.name}, (player) => {
+                    if(Object.keys(this.players).length == 2)
+                        this.randomTurn()
                     io.emit('playerdata', this.players)
                     socket.emit('hello', player)
-                    // if(Object.keys(this.players).length >= 2){}
                 })
             })
 
@@ -41,7 +42,7 @@ module.exports = class gameServer{
             this.players[data.socket.id] = {
                 id: data.socket.id,
                 name: data.name,
-                turn: Object.keys(this.players).length == 0 ? true : false,
+                turn: false,
                 color: '#00ff00',
                 drawData: []
             }
@@ -55,4 +56,19 @@ module.exports = class gameServer{
             this.io.emit('endturn', {id: socket.id})
         }, this.gameSettings.timer * 1000)
     }
+
+    randomTurn(){
+        let rnd = random(0,Object.keys(this.players).length-1),
+            i = 0
+        for(let id in this.players){
+            if(rnd==i)
+                this.players[id].turn = true
+            i++
+        }
+    }
+}
+
+function random(min,max)
+{
+    return Math.floor(Math.random()*(max-min+1)+min);
 }

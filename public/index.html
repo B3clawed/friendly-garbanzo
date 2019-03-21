@@ -1,44 +1,49 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <title>Friendly Garbanzo</title>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Bulma!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  </head>
 
-        <link rel="stylesheet" href="/styles.css" />
-    </head>
+  <body>
+  <section class="section">
+    <div class="container">
+      <h1 class="title">
+        Hello World
+      </h1>
+      <p class="subtitle">
+        My first website with <strong>Bulma</strong>!
+      </p>
+    </div>
 
-    <body>
-        <!---<input class="userInput" type="text" name="userName" value=""></input>--->
-        <!---<button class="userButton" id="login" type="button" onclick="connect()" >Click Me!</button>--->
+    <div id="always" class="modal is-active">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+                <div class="field">
+                      <div class="field">
+                        <p class="control has-icons-left">
+                          <input id="ihatedante"class="input" type="text" placeholder="UserName" >
+                          <span class="icon is-small is-left">
+                            <i class="far fa-user"></i>
+                          </span>
+                        </p>
+                      </div>
+                      <div class="field">
+                        <p class="control">
+                          <button class="button is-success" onclick="connect()">
+                            Join
+                          </button>
+                        </p>
+                      </div>
         
-        <table id="table">
-          <tr id="1"></tr>
-          <tr id="2"></tr>
-          <tr id="3"></tr>
-          <tr id="4"></tr>
-          <tr id="5"></tr>
-          <tr id="6"></tr>
-          <tr id="7"></tr>
-          <tr id="8"></tr>
-          <tr id="9"></tr>
-          <tr id="10"></tr>
-        </table> 
+      </div>
+  </section>
 
-        <canvas id="canvas" width="800" height="600">
-            Your browser needs to support canvas for this to work!
-        </canvas>
-
-        <div class="container"><input class="chatInput" type="text" value=""></input></div>
-        
-
-        
-            
-
-        <!-- JavaScript includes. Notice that socket.io.js is served by node.js -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
-        <script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
-        <script src="/game.js"></script>
-
-
-    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+    <script src="/game.js"></script>
+  </body>
 </html>

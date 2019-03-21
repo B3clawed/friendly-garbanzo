@@ -64,10 +64,10 @@ function setPlayers() {
 }
 
 function connect() {
-    var name = document.getElementsByName("userName")[0].value
-    document.getElementsByName("userName")[0].value = ""
-    players.push(name)
-    document.getElementById(players.length).innerHTML = name
+    var name = document.getElementById("ihatedante").value
+    document.getElementById("ihatedante").value = ""
+    // document.getElementById(players.length).innerHTML = name
+    document.getElementById("always").classList.remove('is-active')
 
     socket = io.connect('http://127.0.0.1:3000')
     socket.emit('login', {name: name})

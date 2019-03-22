@@ -66,9 +66,11 @@ function setPlayers() {
         head.setAttribute("id", count)
         var data = document.createElement("td")
         var node = document.createTextNode(plr.name);
+        var points = document.createTextNode("0")
+        data.appendChild(points)
         head.appendChild(node)
-        head.appendChild(data)
         row.appendChild(head)
+        row.appendChild(data)
         document.getElementById('hotBody').appendChild(row)
         count++
     }

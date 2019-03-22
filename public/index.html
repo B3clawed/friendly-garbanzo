@@ -6,38 +6,70 @@
     <title>Hello Bulma!</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
   </head>
 
   <body>
-  <section class="section">
-    <div class="container">
-      <h1 class="title">
-        Hello World
-      </h1>
-      <p class="subtitle">
-        My first website with <strong>Bulma</strong>!
-      </p>
-    </div>
+    <table class="table">
+      <thead>
+        <th>Name</th>
+        <th>Points</th>
+      </thead>
+      <tbody id="hotBody">
+        <!-- <tr>
+          <th id="1"></th>
+          <td></td>
+        </tr>
+        <tr>
+          <th id="2"></th>
+          <td></td>
+        </tr>
+        <tr>
+          <th id="3"></th>
+          <td></td>
+        </tr>
+        <tr>
+          <th id="4"></th>
+          <td></td>
+        </tr>
+        <tr>
+          <th id="5"></th>
+          <td></td>
+        </tr>
+        <tr>
+          <th id="6"></th>
+          <td></td>
+        </tr>
+        <tr>
+          <th id="7"></th>
+          <td></td>
+        </tr>
+        <tr>
+          <th id="8"></th>
+          <td></td>
+        </tr> -->
+      </tbody>
+    </table>
+    
 
-    <div id="always" class="modal is-active">
+
+    <div id="loginMenu" class="modal is-active">
         <div class="modal-background"></div>
         <div class="modal-content">
-                <div class="field">
-                      <div class="field">
-                        <p class="control has-icons-left">
-                          <input id="ihatedante"class="input" type="text" placeholder="UserName" >
-                          <span class="icon is-small is-left">
-                            <i class="far fa-user"></i>
-                          </span>
-                        </p>
-                      </div>
-                      <div class="field">
-                        <p class="control">
-                          <button class="button is-success" onclick="connect()">
-                            Join
-                          </button>
-                        </p>
-                      </div>
+          <div class="field">
+            <div class="field">
+              <p class="control has-icons-left">
+                <input id="userNameInput"class="input" type="text" placeholder="UserName" >
+                   <span class="icon is-small is-left">
+                      <i class="far fa-user"></i>
+                  </span>
+             </p>
+            </div>
+          <div class="field">
+            <p class="control">
+              <button class="button is-success" onclick="connect()">Join</button>
+            </p>
+      </div>
         
       </div>
   </section>

@@ -8,7 +8,8 @@ var clickX = [],
     clickDrag = [],
     playerData = {},
     self = {},
-    players = []
+    players = [],
+    i = 1
 
 canvas.onmousedown = function(e) {
     e.preventDefault()
@@ -51,23 +52,32 @@ function main() {
 }
 
 function setPlayers() {
-    for(let i=1; i<=10; i++){
-        document.getElementById(i).innerHTML = ''
-    }
+    //  for(let i=1; i<=playerData.length; i++){
+    //      document.getElementById(i).innerHTML = ''
+    //  }
+    document.getElementById('hotBody').innerHTML = ''
 
     let count = 1
     for(let id in playerData){
         let plr = playerData[id]
-        document.getElementById(count).innerHTML = plr.name
+        //document.getElementById(count).innerHTML = plr.name
+        var row = document.createElement("tr")
+        var head = document.createElement("th")
+        head.setAttribute("id", count)
+        var data = document.createElement("td")
+        var node = document.createTextNode(plr.name);
+        head.appendChild(node)
+        head.appendChild(data)
+        row.appendChild(head)
+        document.getElementById('hotBody').appendChild(row)
         count++
     }
 }
 
 function connect() {
-    var name = document.getElementById("ihatedante").value
-    document.getElementById("ihatedante").value = ""
     // document.getElementById(players.length).innerHTML = name
-    document.getElementById("always").classList.remove('is-active')
+    var name = document.getElementById("userNameInput").value
+    document.getElementById("userNameInput").value = ""
 
     socket = io.connect('http://127.0.0.1:3000')
     socket.emit('login', {name: name})
@@ -91,10 +101,11 @@ function connect() {
     })
     
     socket.on('connect', () => {
+        document.getElementById("loginMenu").classList.remove('is-active')
     })
 
-    document.getElementsByName("userName")[0].remove()
-    document.getElementById('login').remove()
+    // document.getElementsByName("userName")[0].remove()
+    // document.getElementById('login').remove()
 }
 
  

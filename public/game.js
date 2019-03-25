@@ -51,6 +51,15 @@ function main() {
     requestAnimationFrame(main)
 }
 
+function sendMessage() {
+    var ogArea = document.getElementById("ogBody")
+    var msg = document.getElementById('chatArea')
+    var box = document.createElement("div")
+    box.setAttribute("class", "message-body")
+    box.innerText = ""+msg+""
+    ogArea.append(box)
+}
+
 function setPlayers() {
     //  for(let i=1; i<=playerData.length; i++){
     //      document.getElementById(i).innerHTML = ''

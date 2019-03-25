@@ -6,6 +6,7 @@
     <title>Hello Bulma!</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <link rel="stylesheet" href="styles.css">
 
   </head>
 
@@ -16,40 +17,16 @@
         <th>Points</th>
       </thead>
       <tbody id="hotBody">
-        <!-- <tr>
-          <th id="1"></th>
-          <td></td>
-        </tr>
-        <tr>
-          <th id="2"></th>
-          <td></td>
-        </tr>
-        <tr>
-          <th id="3"></th>
-          <td></td>
-        </tr>
-        <tr>
-          <th id="4"></th>
-          <td></td>
-        </tr>
-        <tr>
-          <th id="5"></th>
-          <td></td>
-        </tr>
-        <tr>
-          <th id="6"></th>
-          <td></td>
-        </tr>
-        <tr>
-          <th id="7"></th>
-          <td></td>
-        </tr>
-        <tr>
-          <th id="8"></th>
-          <td></td>
-        </tr> -->
       </tbody>
     </table>
+
+    <canvas id='canvas' width='800' height='600'></canvas>
+
+    <article id= "ogBody" class="message">
+    </article>
+
+    <input id="chatArea" class="input" type="text" placeholder="Text input">
+    <button id="chatButton" class="button is-success is-rounded" onclick="sendMessage()">Enter</button>
     
 
 

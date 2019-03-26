@@ -52,13 +52,18 @@ function main() {
 }
 
 function sendMessage() {
-    var ogArea = document.getElementById("ogBody")
     var msg = document.getElementById('chatArea').value
+    socket.emit('message', {message: msg})
+    addMessage({name: self.name, message: msg})
+}
+
+function addMessage(data){
+    var ogArea = document.getElementById("ogBody")
     var box = document.createElement("div")
     box.setAttribute("class", "message-body")
-    box.innerText = ""+msg+""
+    box.innerText = "" + data.name + ": " + data.message
     ogArea.append(box)
-    document.getElementById('chatArea').value = 0
+    document.getElementById('chatArea').value = ''
 }
 
 function setPlayers() {
@@ -96,6 +101,10 @@ function connect() {
 
     socket.on('drawdata', (data) => {
         playerData[data.id].drawData.push(data)
+    })
+
+    socket.on('message', (data) => {
+        addMessage(data)
     })
     
     socket.on('clearCanvas', ()=>{

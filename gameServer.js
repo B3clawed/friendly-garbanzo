@@ -19,6 +19,11 @@ module.exports = class gameServer{
                 })
             })
 
+            socket.on('message', (data) => {
+                console.log(data)
+                socket.broadcast.emit('message', {name: this.players[socket.id].name, message: data.message})
+            })
+
             socket.once('disconnect', () => {
                 delete this.players[socket.id]
                 io.emit('playerdata', this.players)
@@ -43,7 +48,7 @@ module.exports = class gameServer{
                 id: data.socket.id,
                 name: data.name,
                 turn: false,
-                color: '#00ff00',
+                color: '#df4b26',
                 drawData: []
             }
         )

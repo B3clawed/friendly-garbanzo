@@ -53,11 +53,12 @@ function main() {
 
 function sendMessage() {
     var ogArea = document.getElementById("ogBody")
-    var msg = document.getElementById('chatArea')
+    var msg = document.getElementById('chatArea').value
     var box = document.createElement("div")
     box.setAttribute("class", "message-body")
     box.innerText = ""+msg+""
     ogArea.append(box)
+    document.getElementById('chatArea').value = 0
 }
 
 function setPlayers() {

@@ -1,13 +1,11 @@
- body {
-    background-color: #ffa64d;
-} 
+
  table {
    float: left;
    width: 20%;
  }
 
  canvas {
-  background-color: black;
+  background-color: cyan;
   display: absolute;
   cursor: crosshair;
   float: left;
@@ -19,6 +17,7 @@
   float: left;
   width: 30%;
 }
+
 
 #chatArea {
   position: relative;

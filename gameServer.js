@@ -20,7 +20,6 @@ module.exports = class gameServer{
             })
 
             socket.on('message', (data) => {
-                console.log(data)
                 socket.broadcast.emit('message', {name: this.players[socket.id].name, message: data.message})
             })
 

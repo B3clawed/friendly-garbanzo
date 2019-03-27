@@ -47,10 +47,12 @@ function addClick (x, y, dragging) {
 }
 
 function main() {
+    checkTurn()
     redraw()
     requestAnimationFrame(main)
 }
 
+<<<<<<< HEAD
 function sendMessage(e) {
     console.log(e)
     if(e.keyCode == 13 || e == 69) {
@@ -58,6 +60,20 @@ function sendMessage(e) {
         socket.emit('message', {message: msg})
         addMessage({name: self.name, message: msg})
     }
+=======
+function checkTurn(){
+    for(let id in playerData){
+        let plr = playerData[id]
+        if(plr.turn)
+            document.getElementById(plr.id).style.backgroundColor = "#23d160"
+    }
+}
+
+function sendMessage() {
+    var msg = document.getElementById('chatArea').value
+    socket.emit('message', {message: msg})
+    addMessage({name: self.name, message: msg})
+>>>>>>> 5024fec883e92f0cb50b40b556f7a60004fe38dd
 }
 
 
@@ -82,7 +98,7 @@ function setPlayers() {
         //document.getElementById(count).innerHTML = plr.name
         var row = document.createElement("tr")
         var head = document.createElement("th")
-        head.setAttribute("id", count)
+        row.setAttribute("id", plr.id)
         var data = document.createElement("td")
         var node = document.createTextNode(plr.name);
         var points = document.createTextNode("0")

@@ -1,35 +1,24 @@
+html {
+  overflow-y: auto;
+}
 
  table {
-   float: left;
-   width: 20%;
+   flex-basis: 20%;
  }
 
  #canvas {
   border-style: solid;
   border-width: 3px;
-  display: absolute;
   cursor: crosshair;
-  margin-left: auto;
-  margin-right: auto;
-  position: absolute;
-  top:0;
-  bottom: 0;
-  left: 0;
-  right: 0;
 } 
 
-.message-body {
-  width: 30%;
-  padding: 10px;
-  float: right;
+.main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-#chatButton {
-  float: right;
+.chat {
+  flex-basis: 17%;
   margin-right: 2%;
-}
-
-#chatArea {
-  width: 20%; 
-  float: right;
 }

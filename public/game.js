@@ -51,11 +51,15 @@ function main() {
     requestAnimationFrame(main)
 }
 
-function sendMessage() {
-    var msg = document.getElementById('chatArea').value
-    socket.emit('message', {message: msg})
-    addMessage({name: self.name, message: msg})
+function sendMessage(e) {
+    console.log(e)
+    if(e.keyCode == 13 || e == 69) {
+        var msg = document.getElementById('chatArea').value
+        socket.emit('message', {message: msg})
+        addMessage({name: self.name, message: msg})
+    }
 }
+
 
 function addMessage(data){
     var ogArea = document.getElementById("ogBody")

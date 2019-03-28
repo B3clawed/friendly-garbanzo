@@ -60,11 +60,18 @@ function checkTurn(){
     }
 }
 
-function sendMessage() {
+function sendMessage(e) {
     var msg = document.getElementById('chatArea').value
-    socket.emit('message', {message: msg})
-    addMessage({name: self.name, message: msg})
+    if((e.keyCode == 13 || e == 69) && !isBlank(msg)) {
+        socket.emit('message', {message: msg})
+        addMessage({name: self.name, message: msg})
+    }
 }
+
+function isBlank(s) {
+    return (!s || /^\s*$/.test(s))
+}
+
 
 function addMessage(data){
     var ogArea = document.getElementById("ogBody")

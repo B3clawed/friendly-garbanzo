@@ -11,26 +11,28 @@
   </head>
 
   <body>
-    <table class="table">
-      <thead>
-        <th>Name</th>
-        <th>Points</th>
-      </thead>
-      <tbody id="hotBody">
-      </tbody>
-    </table>
+    <div class="main">
+      <table class="table">
+        <thead>
+          <th>Name</th>
+          <th>Points</th>
+        </thead>
+        <tbody id="hotBody">
+        </tbody>
+      </table>
 
-    <canvas id='canvas' width='800' height='600'></canvas>
+      <canvas id='canvas' width='800' height='600'></canvas>
 
-    <div class="booboo">
-      <article id= "ogBody" class="message">
-      </article>
-      
-      <button id="chatButton" class="button is-success is-rounded" onclick="sendMessage()">Enter</button>
-      <input id="chatArea" class="input" type="text" placeholder="Text input" value="">
-     
+      <div class="chat">
+        <article id="ogBody" class="message">
+        </article>
+        
+        <div class="chatInput">
+          <input id="chatArea" class="input" type="text" placeholder="Text input" value="" onkeypress=sendMessage(event)>
+          <button id="chatButton" class="button is-success is-rounded" onclick=sendMessage(69)>Enter</button>
+        </div>
+      </div>
     </div>
-    
 
 
     <div id="loginMenu" class="modal is-active">

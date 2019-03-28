@@ -10,7 +10,9 @@ html {
   border-style: solid;
   border-width: 3px;
   cursor: crosshair;
-} 
+}
+
+
 
 .main {
   display: flex;
@@ -21,4 +23,12 @@ html {
 .chat {
   flex-basis: 17%;
   margin-right: 2%;
+}
+
+.message-body {
+  padding: 5px;
+}
+
+.chatInput {
+  display: flex;
 }

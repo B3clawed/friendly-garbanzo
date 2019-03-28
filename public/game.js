@@ -52,15 +52,6 @@ function main() {
     requestAnimationFrame(main)
 }
 
-<<<<<<< HEAD
-function sendMessage(e) {
-    console.log(e)
-    if(e.keyCode == 13 || e == 69) {
-        var msg = document.getElementById('chatArea').value
-        socket.emit('message', {message: msg})
-        addMessage({name: self.name, message: msg})
-    }
-=======
 function checkTurn(){
     for(let id in playerData){
         let plr = playerData[id]
@@ -69,11 +60,16 @@ function checkTurn(){
     }
 }
 
-function sendMessage() {
+function sendMessage(e) {
     var msg = document.getElementById('chatArea').value
-    socket.emit('message', {message: msg})
-    addMessage({name: self.name, message: msg})
->>>>>>> 5024fec883e92f0cb50b40b556f7a60004fe38dd
+    if((e.keyCode == 13 || e == 69) && !isBlank(msg)) {
+        socket.emit('message', {message: msg})
+        addMessage({name: self.name, message: msg})
+    }
+}
+
+function isBlank(s) {
+    return (!s || /^\s*$/.test(s))
 }
 
 

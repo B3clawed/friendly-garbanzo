@@ -24,11 +24,13 @@
       <canvas id='canvas' width='800' height='600'></canvas>
 
       <div class="chat">
-        <article id= "ogBody" class="message">
+        <article id="ogBody" class="message">
         </article>
-      
-        <input id="chatArea" class="input" type="text" placeholder="Text input" value="" onkeypress=sendMessage(event)>
-        <button id="chatButton" class="button is-success is-rounded" onclick=sendMessage(69)>Enter</button>
+        
+        <div class="chatInput">
+          <input id="chatArea" class="input" type="text" placeholder="Text input" value="" onkeypress=sendMessage(event)>
+          <button id="chatButton" class="button is-success is-rounded" onclick=sendMessage(69)>Enter</button>
+        </div>
       </div>
     </div>
 

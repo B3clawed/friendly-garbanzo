@@ -65,10 +65,16 @@ module.exports = class gameServer{
         let rnd = random(0,Object.keys(this.players).length-1),
             i = 0
         for(let id in this.players){
-            if(rnd==i)
+            if(rnd==i){
                 this.players[id].turn = true
+                this.startWordSelection(id)
+            }
             i++
         }
+    }
+
+    startWordSelection(id){
+        this.io.sockets.connected[id].emit('wordSelection', {level1: 'Football', level2: 'Elephant', level3: 'Tired'})
     }
 }
 

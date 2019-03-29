@@ -67,14 +67,14 @@ module.exports = class gameServer{
         for(let id in this.players){
             if(rnd==i){
                 this.players[id].turn = true
-                this.startWordSelection(id)
+                this.startWordChoices(id)
             }
             i++
         }
     }
 
-    startWordSelection(id){
-        this.io.sockets.connected[id].emit('wordSelection', {level1: 'Football', level2: 'Elephant', level3: 'Tired'})
+    startWordChoices(id){
+        this.io.sockets.connected[id].emit('wordChoices', {level1: 'Football', level2: 'Elephant', level3: 'Tired'})
     }
 }
 

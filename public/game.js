@@ -141,6 +141,10 @@ function connect() {
         document.getElementById("loginMenu").classList.remove('is-active')
     })
 
+    socket.on('wordSelection', (data) => {
+        //display: data.level1, data.level2, data.level3 as buttons
+    })
+
     // document.getElementsByName("userName")[0].remove()
     // document.getElementById('login').remove()
 }

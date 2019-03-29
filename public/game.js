@@ -142,6 +142,10 @@ function connect() {
     })
 
     socket.on('wordSelection', (data) => {
+        on()
+        document.getElementById("level1").innerHTML
+        document.getElementById("level2").innerHTML
+        document.getElementById("level3").innerHTML
         //display: data.level1, data.level2, data.level3 as buttons
     })
 

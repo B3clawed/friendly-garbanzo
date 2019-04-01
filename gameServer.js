@@ -29,7 +29,8 @@ module.exports = class gameServer{
             })
 
             socket.on('chooseword', (data) => {
-                this.startTurn(socket, data.id)
+                console.log(data)
+                this.startTurn(socket, data.level)
             })
 
             socket.on('drawdata', (data) => {
@@ -53,8 +54,9 @@ module.exports = class gameServer{
         )
     }
 
-    startTurn(socket, wordId){
+    startTurn(socket, level){
         socket.broadcast.emit('startturn', {id: socket.id})
+        this.io.emit('message', {name: 'GAME', message: `The word has a length of ${this.currentWords[level].split("").length}`})
         setTimeout(() => {
             this.players[socket.id].turn = false
             this.io.emit('endturn', {id: socket.id})
@@ -74,6 +76,7 @@ module.exports = class gameServer{
     }
 
     startWordChoices(id){
+        this.currentWords = ['Football','Elephant','Tired']
         this.io.sockets.connected[id].emit('wordChoices', {level1: 'Football', level2: 'Elephant', level3: 'Tired'})
     }
 }

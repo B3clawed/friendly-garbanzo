@@ -141,6 +141,10 @@ function connect() {
         document.getElementById("loginMenu").classList.remove('is-active')
     })
 
+    socket.on('startturn', () => {
+        //show timer
+    })
+
     socket.on('wordChoices', (data) => {
         on()
         document.getElementById("level1").innerHTML = data.level1
@@ -152,6 +156,23 @@ function connect() {
     // document.getElementsByName("userName")[0].remove()
     // document.getElementById('login').remove()
 }
+
+function level1Click(){
+    socket.emit('chooseword', {level: 0})
+    off()
+}
+
+function level2Click(){
+    socket.emit('chooseword', {level: 1})
+    off()
+}
+
+function level3Click(){
+    socket.emit('chooseword', {level: 2})
+    off()
+}
+
+
 
 function on() {
     document.getElementById("canvasButtons").style.display = "block";

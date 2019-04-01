@@ -24,7 +24,7 @@
       <div id="canvasDiv">
           <div id="overlay">
           <canvas id='canvas'></canvas>
-          <div id="canvasButtons">
+          <div id="canvasButtons" style="display: none;">
             <button id="level1" class="button is-rounded" style=""></button>
             <button id="level2" class="button is-rounded" style=""></button>
             <button id="level3" class="button is-rounded" style=""></button>
@@ -68,14 +68,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
     <script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
     <script src="/game.js"></script>
-    <script>
-        function on() {
-          document.getElementById("overlay").style.display = "block";
-        }
-        
-        function off() {
-          document.getElementById("overlay").style.display = "none";
-        }
-    </script>
   </body>
 </html>

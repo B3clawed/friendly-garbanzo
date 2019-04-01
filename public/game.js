@@ -141,11 +141,11 @@ function connect() {
         document.getElementById("loginMenu").classList.remove('is-active')
     })
 
-    socket.on('wordSelection', (data) => {
+    socket.on('wordChoices', (data) => {
         on()
-        document.getElementById("level1").innerHTML
-        document.getElementById("level2").innerHTML
-        document.getElementById("level3").innerHTML
+        document.getElementById("level1").innerHTML = data.level1
+        document.getElementById("level2").innerHTML = data.level2
+        document.getElementById("level3").innerHTML = data.level3
         //display: data.level1, data.level2, data.level3 as buttons
     })
 
@@ -153,6 +153,15 @@ function connect() {
     // document.getElementById('login').remove()
 }
 
+function on() {
+    document.getElementById("canvasButtons").style.display = "block";
+    document.getElementById("overlay").style.backgroundColor = 'rgba(0,0,0,.5)'
+  }
+  
+  function off() {
+    document.getElementById("canvasButtons").style.display = "none";
+    document.getElementById("overlay").style.opacity = 'rgba(0,0,0,0);'
+  }
  
 requestAnimationFrame(main)
 

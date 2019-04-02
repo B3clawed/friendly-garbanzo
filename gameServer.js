@@ -58,8 +58,10 @@ module.exports = class gameServer{
         socket.broadcast.emit('startturn', {id: socket.id})
         this.io.emit('message', {name: 'GAME', message: `The word has a length of ${this.currentWords[level].split("").length}`})
         setTimeout(() => {
-            this.players[socket.id].turn = false
-            this.io.emit('endturn', {id: socket.id})
+            if(this.players[socket.id]){
+                this.players[socket.id].turn = false
+                this.io.emit('endturn', {id: socket.id})
+            }
         }, this.gameSettings.timer * 1000)
     }
 

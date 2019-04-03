@@ -2,7 +2,8 @@ module.exports = class gameServer{
     constructor(io){
         this.io = io
         this.gameSettings = {
-            timer: 60
+            timer: 60,
+            word: ''
         }
         this.players = {}
 
@@ -20,7 +21,11 @@ module.exports = class gameServer{
             })
 
             socket.on('message', (data) => {
-                socket.broadcast.emit('message', {name: this.players[socket.id].name, message: data.message})
+                if(data.message.toLowerCase() == this.gameSettings.word.toLowerCase()){
+                    io.emit('message', {name: 'GAME', message: `${this.players[socket.id].name} has guessed the word correctly!`})
+                }
+                else
+                    socket.broadcast.emit('message', {name: this.players[socket.id].name, message: data.message})
             })
 
             socket.once('disconnect', () => {
@@ -56,6 +61,7 @@ module.exports = class gameServer{
 
     startTurn(socket, level){
         socket.broadcast.emit('startturn', {id: socket.id})
+        this.gameSettings.word = this.currentWords[level]
         this.io.emit('message', {name: 'GAME', message: `The word has a length of ${this.currentWords[level].split("").length}`})
         setTimeout(() => {
             if(this.players[socket.id]){

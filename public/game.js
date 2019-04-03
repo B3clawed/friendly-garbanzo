@@ -2,10 +2,11 @@
 var socket,
     canvas = document.getElementById('canvas'),
     ctx = canvas.getContext('2d'),
-    drawing = false
+    drawing = false,
+    canDraw = true
 var clickX = [],
     clickY = [],
-    clickDrag = [true,true],
+    clickDrag = [],
     playerData = {},
     self = {},
     players = [],
@@ -38,7 +39,7 @@ document.onmousemove = function (e) {
 }
 
 function addClick (x, y, dragging) {
-    if(self.turn){
+    if(self.turn & canDraw){
         clickX.push(x)
         clickY.push(y)
         clickDrag.push(dragging)
@@ -178,11 +179,13 @@ function level3Click(){
 function on() {
     document.getElementById("canvasButtons").style.display = "block"
     document.getElementById("canvas").style.backgroundColor = 'rgba(0,0,0,.5)'
+    canDraw = false
   }
   
   function off() {
     document.getElementById("canvasButtons").style.display = "none"
     document.getElementById("canvas").style.backgroundColor = 'rgba(0,0,0,0)'
+    canDraw = true
   }
  
 requestAnimationFrame(main)

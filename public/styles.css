@@ -10,13 +10,16 @@ html {
   border-style: solid;
   background-color: rgba(0,0,0,0);
   border-width: 3px;
-  cursor: crosshair;
 }
 
+#canvasDiv {
+  width: 800px;
+  height: 600px;
+}
 
 #canvasButtons {
   margin: 0;
-  top: 50%;
+  top: 33%;
   left: 50%;
   transform: translate(-50%, -50%);
   position: absolute;

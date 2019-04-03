@@ -7,18 +7,12 @@ html {
  }
 
  #canvas {
-  height: 100%;
-  width: 100%;
   border-style: solid;
   background-color: rgba(0,0,0,0);
   border-width: 3px;
+  cursor: crosshair;
 }
 
-#canvasDiv {
-  height: 600px;
-  position: relative; 
-  width: 800px;
-}
 
 #canvasButtons {
   margin: 0;

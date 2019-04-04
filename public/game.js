@@ -10,6 +10,7 @@ var clickX = [],
     playerData = {},
     self = {},
     players = [],
+    playerCount = 0,
     i = 1
 
 canvas.onmousedown = function(e) {
@@ -107,6 +108,10 @@ function setPlayers() {
         document.getElementById('hotBody').appendChild(row)
         count++
     }
+    console.log(document.getElementById('hotBody').childElementCount)
+    if(document.getElementById('hotBody').childElementCount >= 2) {
+        document.getElementById('moreUsersMessage').style.display = "none"
+    }
 }
 
 function connect() {
@@ -141,6 +146,7 @@ function connect() {
     
     socket.on('connect', () => {
         document.getElementById("loginMenu").classList.remove('is-active')
+        playerCount++
     })
 
     socket.on('startturn', () => {

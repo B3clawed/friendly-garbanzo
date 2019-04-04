@@ -174,19 +174,17 @@ function level3Click(){
     off()
 }
 
-
-
 function on() {
     document.getElementById("canvasButtons").style.display = "block"
     document.getElementById("canvas").style.backgroundColor = 'rgba(0,0,0,.5)'
     canDraw = false
   }
   
-  function off() {
+function off() {
     document.getElementById("canvasButtons").style.display = "none"
     document.getElementById("canvas").style.backgroundColor = 'rgba(0,0,0,0)'
-    canDraw = true
-  }
+    canDraw = true              
+}
  
 requestAnimationFrame(main)
 

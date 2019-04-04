@@ -66,7 +66,7 @@ module.exports = class gameServer{
         setTimeout(() => {
             if(this.players[socket.id]){
                 this.players[socket.id].turn = false
-                this.io.emit('endturn', {id: socket.id})
+                this.io.emit('playerdata', this.players)
             }
         }, this.gameSettings.timer * 1000)
     }

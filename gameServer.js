@@ -21,7 +21,7 @@ module.exports = class gameServer{
             })
 
             socket.on('message', (data) => {
-                if(data.message.toLowerCase() == this.gameSettings.word.toLowerCase()){
+                if(data.message.toLowerCase() == this.gameSettings.word.toLowerCase() && this.players[socket.id].turn == false){
                     io.emit('message', {name: 'GAME', message: `${this.players[socket.id].name} has guessed the word correctly!`})
                 }
                 else

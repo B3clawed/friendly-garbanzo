@@ -159,6 +159,7 @@ function connect() {
         document.getElementById("level1").innerHTML = data.level1
         document.getElementById("level2").innerHTML = data.level2
         document.getElementById("level3").innerHTML = data.level3
+        
         //display: data.level1, data.level2, data.level3 as buttons
     })
 

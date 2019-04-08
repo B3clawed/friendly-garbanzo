@@ -149,7 +149,8 @@ function connect() {
         playerCount++
     })
 
-    socket.on('startturn', () => {
+    socket.on('startturn', (data) => {
+        console.log(data)
         //show timer
     })
 

@@ -52,6 +52,7 @@ module.exports = class gameServer{
             this.players[data.socket.id] = {
                 id: data.socket.id,
                 name: data.name,
+                choosingWord: false,
                 turn: false,
                 color: '#df4b26',
                 drawData: []
@@ -60,9 +61,9 @@ module.exports = class gameServer{
     }
 
     startTurn(socket, level){
-        socket.broadcast.emit('startturn', {id: socket.id})
         this.gameSettings.word = this.currentWords[level]
-        this.io.emit('message', {name: 'GAME', message: `The word has a length of ${this.currentWords[level].split("").length}`})
+        socket.broadcast.emit('startturn', {id: socket.id, word: toUnderscores(this.gameSettings.word)})
+        //this.io.emit('message', {name: 'GAME', message: `The word has a length of ${this.currentWords[level].split("").length}`})
         setTimeout(() => {
             if(this.players[socket.id]){
                 this.players[socket.id].turn = false
@@ -84,12 +85,23 @@ module.exports = class gameServer{
     }
 
     startWordChoices(id){
-        this.currentWords = ['Football','Elephant','Tired']
-        this.io.sockets.connected[id].emit('wordChoices', {level1: 'Football', level2: 'Elephant', level3: 'Tired'})
+        this.io.sockets.connected[id].broadcast.emit('choosingword', {})
+        this.currentWords = ['Football','Elephant','Moldy Cheese']
+        this.io.sockets.connected[id].emit('wordChoices', {level1: 'Football', level2: 'Elephant', level3: 'Moldy Cheese'})
     }
 }
 
-function random(min,max)
-{
+function toUnderscores(word){
+    let final = ''
+    for (let i = 0; i < word.length; i++) {
+        if(word.charAt(i) != ' ')
+            final += '_'
+        else
+            final += ' '
+    }
+    return final
+}
+
+function random(min,max){
     return Math.floor(Math.random()*(max-min+1)+min);
 }

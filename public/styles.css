@@ -36,7 +36,7 @@ html {
 .main {
   display: flex;
   flex-direction: row;
-  justify-content: space-between; 
+  justify-content: space-between;
 }
 
 .chat {
@@ -54,6 +54,15 @@ html {
 
 .chatInput {
   display: flex;
+}
+
+.underscore {
+  width: 50%;
+  display: block;
+  margin: auto;
+  text-align: center;
+  font-size: 75px;
+  letter-spacing: 4px;
 }
 
 .icons {

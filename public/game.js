@@ -44,7 +44,6 @@ function addClick (x, y, dragging) {
         clickX.push(x)
         clickY.push(y)
         clickDrag.push(dragging)
-        //console.log(`x: ${x}, y: ${y}, dragging: ${dragging}`)
         socket.emit('drawdata', {dragging: dragging, x: x, y: y})
     }
 }
@@ -60,6 +59,9 @@ function checkTurn(){
         let plr = playerData[id]
         if(plr.turn)
             document.getElementById(plr.id).style.backgroundColor = "#23d160"
+        if(plr.choosingWord){
+            //display "plr.name is choosing a word."
+        }
     }
 }
 
@@ -86,9 +88,6 @@ function addMessage(data){
 }
 
 function setPlayers() {
-    //  for(let i=1; i<=playerData.length; i++){
-    //      document.getElementById(i).innerHTML = ''
-    //  }
     document.getElementById('hotBody').innerHTML = ''
 
     let count = 1
@@ -115,7 +114,6 @@ function setPlayers() {
 }
 
 function connect() {
-    // document.getElementById(players.length).innerHTML = name
     var name = document.getElementById("userNameInput").value
     document.getElementById("userNameInput").value = ""
 
@@ -151,7 +149,7 @@ function connect() {
 
     socket.on('startturn', (data) => {
         console.log(data)
-        //show timer
+        //show timer & display underscores & remove choosing word overlay
     })
 
     socket.on('wordChoices', (data) => {
@@ -159,8 +157,6 @@ function connect() {
         document.getElementById("level1").innerHTML = data.level1
         document.getElementById("level2").innerHTML = data.level2
         document.getElementById("level3").innerHTML = data.level3
-        
-        //display: data.level1, data.level2, data.level3 as buttons
     })
 
     // document.getElementsByName("userName")[0].remove()

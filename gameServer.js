@@ -52,7 +52,7 @@ module.exports = class gameServer{
             this.players[data.socket.id] = {
                 id: data.socket.id,
                 name: data.name,
-                choosingWord: false,
+                choosingWord = false,
                 turn: false,
                 color: '#df4b26',
                 drawData: []
@@ -63,7 +63,8 @@ module.exports = class gameServer{
     startTurn(socket, level){
         this.gameSettings.word = this.currentWords[level]
         socket.broadcast.emit('startturn', {id: socket.id, word: toUnderscores(this.gameSettings.word)})
-        //this.io.emit('message', {name: 'GAME', message: `The word has a length of ${this.currentWords[level].split("").length}`})
+        this.players[socket.id].choosingWord = false
+        this.io.emit('playerdata', this.players)
         setTimeout(() => {
             if(this.players[socket.id]){
                 this.players[socket.id].turn = false
@@ -85,9 +86,11 @@ module.exports = class gameServer{
     }
 
     startWordChoices(id){
-        this.io.sockets.connected[id].broadcast.emit('choosingword', {})
+        let socket = this.io.sockets.connected[id]
+        this.players[id].choosingWord = true
+        this.io.emit('playerdata', this.players)
         this.currentWords = ['Football','Elephant','Moldy Cheese']
-        this.io.sockets.connected[id].emit('wordChoices', {level1: 'Football', level2: 'Elephant', level3: 'Moldy Cheese'})
+        socket.emit('wordChoices', {level1: 'Football', level2: 'Elephant', level3: 'Moldy Cheese'})
     }
 }
 

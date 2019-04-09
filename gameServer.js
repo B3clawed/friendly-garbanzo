@@ -15,8 +15,8 @@ module.exports = class gameServer{
                 this.addPlayer({socket: socket, name: data.name}, (player) => {
                     if(Object.keys(this.players).length == 2)
                         this.randomTurn()
-                    io.emit('playerdata', this.players)
                     socket.emit('hello', player)
+                    io.emit('playerdata', this.players)
                 })
             })
 
@@ -52,7 +52,7 @@ module.exports = class gameServer{
             this.players[data.socket.id] = {
                 id: data.socket.id,
                 name: data.name,
-                choosingWord = false,
+                choosingWord: false,
                 turn: false,
                 color: '#df4b26',
                 drawData: []

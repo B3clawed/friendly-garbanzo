@@ -49,7 +49,6 @@ function addClick (x, y, dragging) {
 }
 
 function main() {
-    checkTurn()
     redraw()
     requestAnimationFrame(main)
 }
@@ -59,7 +58,8 @@ function checkTurn(){
         let plr = playerData[id]
         if(plr.turn)
             document.getElementById(plr.id).style.backgroundColor = "#23d160"
-        if(plr.choosingWord){
+        if(plr.choosingWord && id != self.id){
+            console.log(self)
             //display "plr.name is choosing a word."
         }
     }
@@ -107,7 +107,6 @@ function setPlayers() {
         document.getElementById('hotBody').appendChild(row)
         count++
     }
-    console.log(document.getElementById('hotBody').childElementCount)
     if(document.getElementById('hotBody').childElementCount >= 2) {
         document.getElementById('moreUsersMessage').style.display = "none"
     }
@@ -134,12 +133,17 @@ function connect() {
     
     socket.on('playerdata', (players) => {
         playerData = players
-        self = players[self.id]
+        if(players[self.id]){
+            self = players[self.id]
+            console.log(self)
+        }
         setPlayers()
+        checkTurn()
     })
     
     socket.on('hello', (data) => {
         self = data
+        console.log(self)
     })
     
     socket.on('connect', () => {

@@ -60,7 +60,6 @@ function checkTurn(){
         if(plr.turn)
             document.getElementById(plr.id).style.backgroundColor = "#23d160"
         if(plr.choosingWord){
-            //display "plr.name is choosing a word."
         }
     }
 }

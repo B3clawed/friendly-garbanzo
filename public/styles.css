@@ -2,6 +2,12 @@ html {
   overflow-y: auto;
 }
 
+#countdowntimer {
+  border-style: solid;
+  border-width: 1px;
+  font-size: 100px;
+}
+
  table {
    flex-basis: 20%;
  }
@@ -10,14 +16,27 @@ html {
   border-style: solid;
   background-color: rgba(0,0,0,0);
   border-width: 3px;
+  /* position: absolute;
+  top: 0;
+  left: 0; */
 }
 
 #canvasDiv {
   width: 800px;
   height: 600px;
+  /* position: relative; */
 }
 
 #moreUsersMessage {
+  margin: 0;
+  top: 33%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+}
+
+#choosingWordsMessage {
+  display: none;
   margin: 0;
   top: 33%;
   left: 50%;

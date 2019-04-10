@@ -52,7 +52,7 @@ module.exports = class gameServer{
             this.players[data.socket.id] = {
                 id: data.socket.id,
                 name: data.name,
-                choosingWord = false,
+                choosingWord: false,
                 turn: false,
                 color: '#df4b26',
                 drawData: []

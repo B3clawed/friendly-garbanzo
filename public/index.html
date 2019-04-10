@@ -11,6 +11,8 @@
   </head>
 
   <body>
+    <!-- <span id="countdowntimer">10</span> -->
+
     <div class="main">
       <table class="table">
         <thead>
@@ -31,6 +33,11 @@
           <article class="message is-danger" id="moreUsersMessage">
             <div class="message-header">
               <p>More Users Are Needed To Start The Game</p>
+            </div>
+          </article>
+          <article class="message is-info" id="choosingWordsMessage">
+            <div class="message-header">
+              <p id="choosingWordsP"></p>
             </div>
           </article>
           
@@ -81,5 +88,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
     <script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
     <script src="/game.js"></script>
+    <script type="text/javascript">
+      var timeleft = 10;
+      var downloadTimer = setInterval(function(){
+      timeleft--;
+      document.getElementById("countdowntimer").textContent = timeleft;
+      if(timeleft <= 0)
+          clearInterval(downloadTimer);
+      },1000);
+    </script>
   </body>
 </html>

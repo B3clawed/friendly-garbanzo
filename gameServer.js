@@ -2,8 +2,9 @@ module.exports = class gameServer{
     constructor(io){
         this.io = io
         this.gameSettings = {
-            timer: 60,
-            word: ''
+            timer: 10,
+            word: '',
+            turnIdx: 0
         }
         this.players = {}
 
@@ -14,7 +15,7 @@ module.exports = class gameServer{
             socket.on('login', (data) => {
                 this.addPlayer({socket: socket, name: data.name}, (player) => {
                     if(Object.keys(this.players).length == 2)
-                        this.randomTurn()
+                        this.nextTurn()
                     socket.emit('hello', player)
                     io.emit('playerdata', this.players)
                 })
@@ -70,7 +71,24 @@ module.exports = class gameServer{
                 this.players[socket.id].turn = false
                 this.io.emit('playerdata', this.players)
             }
+            this.nextTurn()
         }, this.gameSettings.timer * 1000)
+    }
+
+    nextTurn(){
+        console.log(this.gameSettings.turnIdx)
+        if(this.gameSettings.turnIdx+1 > this.players.length)
+            this.gameSettings.turnIdx = 0
+        let i = 0
+        for(let id in this.players){
+            if(i == this.gameSettings.turnIdx){
+                this.players[id].turn = true
+                this.startWordChoices(id)
+                break
+            }
+            i++
+        }
+        this.gameSettings.turnIdx++
     }
 
     randomTurn(){

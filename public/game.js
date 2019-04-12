@@ -58,9 +58,8 @@ function checkTurn(){
         let plr = playerData[id]
         if(plr.turn)
             document.getElementById(plr.id).style.backgroundColor = "#23d160"
-        if(plr.choosingWord && id != self.id){
-            console.log(self)
-            //display "plr.name is choosing a word."
+        if(plr.choosingWord && id != socket.id){
+            console.log(`${plr.name} is choosing a word.`)
         }
     }
 }
@@ -133,17 +132,13 @@ function connect() {
     
     socket.on('playerdata', (players) => {
         playerData = players
-        if(players[self.id]){
-            self = players[self.id]
-            console.log(self)
-        }
+        self = players[socket.id] ? players[socket.id] : self
         setPlayers()
         checkTurn()
     })
     
     socket.on('hello', (data) => {
         self = data
-        console.log(self)
     })
     
     socket.on('connect', () => {

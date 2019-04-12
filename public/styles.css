@@ -2,15 +2,18 @@ html {
   overflow-y: auto;
 }
 
-#countdowntimer {
-  border-style: solid;
-  border-width: 1px;
-  font-size: 100px;
-}
-
  table {
    flex-basis: 20%;
  }
+
+#countdowntimer {
+  border-style: solid;
+  border-width: 1px;
+  font-size: 65px;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+}
 
  #canvas {
   border-style: solid;
@@ -24,7 +27,7 @@ html {
 #canvasDiv {
   width: 800px;
   height: 600px;
-  /* position: relative; */
+  position: relative;
 }
 
 #moreUsersMessage {
@@ -75,7 +78,7 @@ html {
   display: flex;
 }
 
-.underscore {
+#underscore {
   width: 50%;
   display: block;
   margin: auto;

@@ -72,7 +72,7 @@ module.exports = class gameServer{
                 this.io.emit('playerdata', this.players)
             }
             this.nextTurn()
-        }, this.gameSettings.timer * 1000)
+        }, this.gameSettings.timer * 10000)
     }
 
     nextTurn(){

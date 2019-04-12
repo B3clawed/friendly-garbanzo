@@ -11,7 +11,7 @@
   </head>
 
   <body>
-    <!-- <span id="countdowntimer">10</span> -->
+    <!-- <span id="countdowntimer">60</span> -->
 
     <div class="main">
       <table class="table">
@@ -61,7 +61,7 @@
 
      
     </div>
-    <div class="underscore"></div>
+    <div id="underscore"></div>
 
 
     <div id="loginMenu" class="modal is-active">
@@ -88,14 +88,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
     <script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
     <script src="/game.js"></script>
-    <script type="text/javascript">
-      var timeleft = 10;
+    <!-- <script type="text/javascript">
+      var timeleft = 60;
       var downloadTimer = setInterval(function(){
       timeleft--;
       document.getElementById("countdowntimer").textContent = timeleft;
       if(timeleft <= 0)
           clearInterval(downloadTimer);
       },1000);
-    </script>
+    </script> -->
   </body>
 </html>

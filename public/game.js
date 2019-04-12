@@ -1,7 +1,9 @@
-
 var socket,
     canvas = document.getElementById('canvas'),
     ctx = canvas.getContext('2d'),
+    rect = canvas.getBoundingClientRect(),
+    canvasLeft = rect.left,
+    canvasTop = rect.top,
     drawing = false,
     canDraw = true
 var clickX = [],
@@ -16,7 +18,8 @@ var clickX = [],
 canvas.onmousedown = function(e) {
     e.preventDefault()
     drawing = true
-    addClick(e.pageX-canvas.offsetLeft,e.pageY-canvas.offsetTop)
+    addClick(e.pageX-canvasLeft,e.pageY-canvasTop)
+    // addClick(100,100)
 }
 
 document.onmouseup = function(e) {
@@ -35,8 +38,10 @@ canvas.onblur = function(e) {
 }
 
 document.onmousemove = function (e) {
-    if(drawing)
-        addClick(e.pageX-canvas.offsetLeft,e.pageY-canvas.offsetTop, true)
+    if(drawing) {
+        addClick(e.pageX-canvasLeft,e.pageY-canvasTop, true)
+    }
+        // addClick(e.pageX-canvas.offsetLeft,e.pageY-canvas.offsetTop, true)
 }
 
 function addClick (x, y, dragging) {

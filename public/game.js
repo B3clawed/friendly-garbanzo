@@ -19,7 +19,6 @@ canvas.onmousedown = function(e) {
     e.preventDefault()
     drawing = true
     addClick(e.pageX-canvasLeft,e.pageY-canvasTop)
-    // addClick(100,100)
 }
 
 document.onmouseup = function(e) {
@@ -41,7 +40,6 @@ document.onmousemove = function (e) {
     if(drawing) {
         addClick(e.pageX-canvasLeft,e.pageY-canvasTop, true)
     }
-        // addClick(e.pageX-canvas.offsetLeft,e.pageY-canvas.offsetTop, true)
 }
 
 function addClick (x, y, dragging) {
@@ -65,8 +63,14 @@ function checkTurn(){
             document.getElementById(plr.id).style.backgroundColor = "#23d160"
         if(plr.choosingWord && id != socket.id){
             console.log(`${plr.name} is choosing a word.`)
+            choosingOn(plr.name)
         }
     }
+}
+
+function choosingOn(name) {
+    document.getElementById("choosingWordsMessage").style.display = "block"
+    document.getElementById("choosingWordsP").innerText = name + " is choosing a word!"
 }
 
 function sendMessage(e) {

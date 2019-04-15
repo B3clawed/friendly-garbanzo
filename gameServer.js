@@ -2,7 +2,7 @@ module.exports = class gameServer{
     constructor(io){
         this.io = io
         this.gameSettings = {
-            timer: 10,
+            timer: 30,
             word: '',
             turnIdx: 0
         }
@@ -31,6 +31,8 @@ module.exports = class gameServer{
 
             socket.once('disconnect', () => {
                 delete this.players[socket.id]
+                if(Object.keys(this.players).length == 0)
+                    this.reset()
                 io.emit('playerdata', this.players)
             })
 
@@ -72,12 +74,20 @@ module.exports = class gameServer{
                 this.io.emit('playerdata', this.players)
             }
             this.nextTurn()
-        }, this.gameSettings.timer * 10000)
+        }, this.gameSettings.timer * 1000)
+    }
+
+    reset(){
+        this.gameSettings = {
+            timer: 30,
+            word: '',
+            turnIdx: 0
+        }
     }
 
     nextTurn(){
         console.log(this.gameSettings.turnIdx)
-        if(this.gameSettings.turnIdx+1 > this.players.length)
+        if(this.gameSettings.turnIdx+1 > Object.keys(this.players).length)
             this.gameSettings.turnIdx = 0
         let i = 0
         for(let id in this.players){

@@ -2,18 +2,42 @@ html {
   overflow-y: auto;
 }
 
- table {
-   flex-basis: 20%;
+ .upperSpace {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
  }
 
 #countdowntimer {
+  display: flex;
   border-style: solid;
   border-width: 1px;
   font-size: 65px;
   width: 100px;
   height: 100px;
   text-align: center;
+  visibility: hidden;
 }
+
+#underscore {
+  display: flex;
+  width: 50%;
+  margin-left: 500px;
+  text-align: center;
+  font-size: 75px;
+  letter-spacing: 4px;
+  visibility: hidden;
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+ table {
+   flex-basis: 20%;
+ }
 
  #canvas {
   border-style: solid;
@@ -42,12 +66,6 @@ html {
   margin: auto;
 }
 
-.main {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
 .chat {
   flex-basis: 17%;
   margin-right: 2%;
@@ -65,20 +83,8 @@ html {
   display: flex;
 }
 
-#underscore {
-  width: 50%;
-  display: block;
-  margin: auto;
-  text-align: center;
-  font-size: 75px;
-  letter-spacing: 4px;
-}
-
 .icons {
   float: right;
 }
 
-#countdowntimer {
-  visibility: hidden;
-}
 

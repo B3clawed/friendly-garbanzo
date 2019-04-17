@@ -158,8 +158,8 @@ function connect(e) {
         socket.on('startturn', (data) => {
             console.log(data)
             document.getElementById("choosingWordsMessage").style.display = "none"
-            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
             startTimer(30)
+            document.getElementById("underscore").innerText = data.word
         })
 
         socket.on('wordChoices', (data) => {
@@ -176,6 +176,7 @@ function connect(e) {
 
 function startTimer(time) {
     document.getElementById("countdowntimer").style.visibility = "visible"
+    document.getElementById("underscore").style.visibility = "visible"
     var timeleft = time
     var downloadTimer = setInterval(function(){
     timeleft--
@@ -202,6 +203,7 @@ function level3Click(){
     wordChoicesOff()
     startTimer(30)
 }
+
 
 function wordChoicesOn() {
     document.getElementById("canvasButtons").style.display = "block"

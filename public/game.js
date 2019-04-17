@@ -135,8 +135,10 @@ function connect(e) {
             addMessage(data)
         })
         
-        socket.on('clearCanvas', ()=>{
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        socket.on('clearcanvas', ()=>{
+            clickX = []
+            clickY = []
+            clickDrag = []
         })
         
         socket.on('playerdata', (players) => {
@@ -160,6 +162,7 @@ function connect(e) {
             document.getElementById("choosingWordsMessage").style.display = "none"
             ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
             startTimer(30)
+            document.getElementById("underscore").innerText = data.word
         })
 
         socket.on('wordChoices', (data) => {
@@ -237,7 +240,7 @@ function redraw() {
 
     for(let id in playerData){
         let player = playerData[id]
-        if(player.turn && id != self.id){
+        if(id != self.id){
             let drawData = player.drawData
             ctx.strokeStyle = player.color
             for(let i=0; i<drawData.length; i++){

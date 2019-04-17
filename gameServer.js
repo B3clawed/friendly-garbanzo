@@ -65,12 +65,13 @@ module.exports = class gameServer{
 
     startTurn(socket, level){
         this.gameSettings.word = this.currentWords[level]
-        socket.broadcast.emit('startturn', {id: socket.id, word: toUnderscores(this.gameSettings.word)})
+        this.io.emit('startturn', {id: socket.id, word: toUnderscores(this.gameSettings.word)})
         this.players[socket.id].choosingWord = false
         this.io.emit('playerdata', this.players)
         setTimeout(() => {
             if(this.players[socket.id]){
                 this.players[socket.id].turn = false
+                this.players[socket.id].drawData = []
                 this.io.emit('playerdata', this.players)
             }
             this.nextTurn()
@@ -118,6 +119,7 @@ module.exports = class gameServer{
         this.players[id].choosingWord = true
         this.io.emit('playerdata', this.players)
         this.currentWords = ['Football','Elephant','Moldy Cheese']
+        this.io.emit('clearcanvas')
         socket.emit('wordChoices', {level1: 'Football', level2: 'Elephant', level3: 'Moldy Cheese'})
     }
 }

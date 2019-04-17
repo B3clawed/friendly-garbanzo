@@ -78,3 +78,7 @@ html {
   float: right;
 }
 
+#countdowntimer {
+  visibility: hidden;
+}
+

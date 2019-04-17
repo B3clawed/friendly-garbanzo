@@ -59,10 +59,9 @@ function main() {
 function checkTurn(){
     for(let id in playerData){
         let plr = playerData[id]
-        if(plr.turn)
+        if(plr.turn) {
             document.getElementById(plr.id).style.backgroundColor = "#23d160"
-        if(plr.choosingWord && id != socket.id){
-            console.log(`${plr.name} is choosing a word.`)
+        } if(plr.choosingWord && id != socket.id){
             choosingOn(plr.name)
         }
     }
@@ -120,79 +119,97 @@ function setPlayers() {
     }
 }
 
-function connect() {
-    var name = document.getElementById("userNameInput").value
-    document.getElementById("userNameInput").value = ""
+function connect(e) {
+    if(e == 69 || e.keyCode == 13) {
+        var name = document.getElementById("userNameInput").value
+        document.getElementById("userNameInput").value = ""
 
-    socket = io.connect('http://127.0.0.1:3000')
-    socket.emit('login', {name: name})
+        socket = io.connect('http://127.0.0.1:3000')
+        socket.emit('login', {name: name})
 
-    socket.on('drawdata', (data) => {
-        playerData[data.id].drawData.push(data)
-    })
+        socket.on('drawdata', (data) => {
+            playerData[data.id].drawData.push(data)
+        })
 
-    socket.on('message', (data) => {
-        addMessage(data)
-    })
-    
-    socket.on('clearCanvas', ()=>{
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-    })
-    
-    socket.on('playerdata', (players) => {
-        playerData = players
-        self = players[socket.id] ? players[socket.id] : self
-        setPlayers()
-        checkTurn()
-    })
-    
-    socket.on('hello', (data) => {
-        self = data
-    })
-    
-    socket.on('connect', () => {
-        document.getElementById("loginMenu").classList.remove('is-active')
-        playerCount++
-    })
+        socket.on('message', (data) => {
+            addMessage(data)
+        })
+        
+        socket.on('clearCanvas', ()=>{
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        })
+        
+        socket.on('playerdata', (players) => {
+            playerData = players
+            self = players[socket.id] ? players[socket.id] : self
+            setPlayers()
+            checkTurn()
+        })
+        
+        socket.on('hello', (data) => {
+            self = data
+        })
+        
+        socket.on('connect', () => {
+            document.getElementById("loginMenu").classList.remove('is-active')
+            playerCount++
+        })
 
-    socket.on('startturn', (data) => {
-        console.log(data)
-        //show timer & display underscores & remove choosing word overlay
-    })
+        socket.on('startturn', (data) => {
+            console.log(data)
+            document.getElementById("choosingWordsMessage").style.display = "none"
+            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
+            startTimer(30)
+        })
 
-    socket.on('wordChoices', (data) => {
-        on()
-        document.getElementById("level1").innerHTML = data.level1
-        document.getElementById("level2").innerHTML = data.level2
-        document.getElementById("level3").innerHTML = data.level3
-    })
+        socket.on('wordChoices', (data) => {
+            wordChoicesOn()
+            document.getElementById("level1").innerHTML = data.level1
+            document.getElementById("level2").innerHTML = data.level2
+            document.getElementById("level3").innerHTML = data.level3
+        })
 
     // document.getElementsByName("userName")[0].remove()
     // document.getElementById('login').remove()
+    }
+}
+
+function startTimer(time) {
+    document.getElementById("countdowntimer").style.visibility = "visible"
+    var timeleft = time
+    var downloadTimer = setInterval(function(){
+    timeleft--
+    document.getElementById("countdowntimer").textContent = timeleft
+    if(timeleft <= 0)
+        clearInterval(downloadTimer)
+    },1000)
 }
 
 function level1Click(){
     socket.emit('chooseword', {level: 0})
-    off()
+    wordChoicesOff()
+    startTimer(30)
 }
 
 function level2Click(){
     socket.emit('chooseword', {level: 1})
-    off()
+    wordChoicesOff()
+    startTimer(30)
 }
 
 function level3Click(){
     socket.emit('chooseword', {level: 2})
-    off()
+    wordChoicesOff()
+    startTimer(30)
 }
 
-function on() {
+function wordChoicesOn() {
     document.getElementById("canvasButtons").style.display = "block"
     document.getElementById("canvas").style.backgroundColor = 'rgba(0,0,0,.5)'
     canDraw = false
   }
   
-function off() {
+function wordChoicesOff() {
     document.getElementById("canvasButtons").style.display = "none"
     document.getElementById("canvas").style.backgroundColor = 'rgba(0,0,0,0)'
     canDraw = true              

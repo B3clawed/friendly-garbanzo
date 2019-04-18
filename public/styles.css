@@ -83,8 +83,10 @@ html {
   display: flex;
 }
 
-.icons {
-  float: right;
+.lowerSide {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center
 }
 
 

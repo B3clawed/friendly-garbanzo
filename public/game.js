@@ -67,6 +67,35 @@ function checkTurn(){
     }
 }
 
+function changeStroke(change) {
+    switch(change) {
+        case 'red':
+            ctx.strokeStyle = "#df4b26"
+            break;
+        case 'green':
+            ctx.strokeStyle = "#df4b26"
+            break;
+        case 'blue':
+            ctx.strokeStyle = "#df4b26"
+            break;
+        case 'brown':
+            ctx.strokeStyle = "#df4b26"
+            break;
+        case 'yellow':
+            ctx.strokeStyle = "#df4b26"
+            break;
+        case 'black':
+            ctx.strokeStyle = "#df4b26"
+            break;
+        case 'eraser':
+            // ctx.strokeStyle = "#df4b26"
+            break;
+        case 'clear':
+            // ctx.strokeStyle = "#df4b26"
+            break;    
+    }
+}
+
 function choosingOn(name) {
     document.getElementById("choosingWordsMessage").style.display = "block"
     document.getElementById("choosingWordsP").innerText = name + " is choosing a word!"

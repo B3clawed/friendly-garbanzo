@@ -5,11 +5,12 @@ html {
  .upperSpace {
    display: flex;
    flex-direction: row;
-   justify-content: space-between;
+   justify-content: center;
  }
 
 #countdowntimer {
-  display: flex;
+  float: left;
+  display: absolute;
   border-style: solid;
   border-width: 1px;
   font-size: 65px;
@@ -20,9 +21,8 @@ html {
 }
 
 #underscore {
-  display: flex;
+  margin: 0 auto;
   width: 50%;
-  margin-left: 500px;
   text-align: center;
   font-size: 75px;
   letter-spacing: 4px;

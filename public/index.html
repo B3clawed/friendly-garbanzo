@@ -11,11 +11,11 @@
   </head>
 
   <body>
-    <div class="upperSpace">
+    <!-- <div class="upperSpace"> -->
       <div id="countdowntimer"></div>
       <div id="underscore">___________</div>
       <div></div>
-    </div>
+    <!-- </div> -->
 
     <div class="main">
       <table class="table">
@@ -64,12 +64,12 @@
       <p class="buttons">
         <a class="button">
           <span class="icon is-small">
-            <i class="fas fa-trash fa-2x"></i>
+            <i class="fas fa-trash fa-2x" onclick="changeStroke('clear')"></i>
           </span>
         </a>
         <a class="button">
           <span class="icon is-small">
-            <i class="fas fa-eraser fa-2x"></i>
+            <i class="fas fa-eraser fa-2x" onclick="changeStroke('eraser')"></i>
           </span>
         </a>
       </p>
@@ -77,12 +77,12 @@
       
         <div class="select is-rounded">
             <select>
-              <option style="background:red;">Red</option>
-              <option style="background:rgb(7, 192, 7);">Green</option>
-              <option style="background:rgb(6, 91, 248);">Blue</option>
-              <option style="background:rgb(121, 36, 36); color:white;">Brown</option>
-              <option style="background:yellow;">Yellow</option>
-              <option style="background:black; color:white;">Black</option>
+              <option style="background:red;" onclick="changeStroke('red')">Red</option>
+              <option style="background:rgb(7, 192, 7);" onclick="changeStroke('green')">Green</option>
+              <option style="background:rgb(6, 91, 248);" onclick="changeStroke('blue')">Blue</option>
+              <option style="background:rgb(121, 36, 36); color:white;" onclick="changeStroke('brown')">Brown</option>
+              <option style="background:yellow;" onclick="changeStroke('yellow')">Yellow</option>
+              <option style="background:black; color:white;" onclick="changeStroke('black')">Black</option>
             </select>
           </div>
 

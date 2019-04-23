@@ -244,7 +244,7 @@ function wordChoicesOn() {
   
 function wordChoicesOff() {
     document.getElementById("canvasButtons").style.display = "none"
-    document.getElementById("canvas").style.backgroundColor = 'rgba(0,0,0,0)'
+    document.getElementById("canvas").style.backgroundColor = 'rgba(255,255,255)'
     canDraw = true              
 }
  

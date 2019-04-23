@@ -21,6 +21,14 @@ module.exports = class gameServer{
                 })
             })
 
+            socket.on('clearcanvas', () => {
+                if(this.players[socket.id].turn){
+                    this.players[socket.id].drawData = []
+                    this.io.emit('playerdata', this.players)
+                    io.emit('clearcanvas')
+                }
+            })
+
             socket.on('message', (data) => {
                 if(data.message.toLowerCase() == this.gameSettings.word.toLowerCase() && this.players[socket.id].turn == false){
                     io.emit('message', {name: 'GAME', message: `${this.players[socket.id].name} has guessed the word correctly!`})

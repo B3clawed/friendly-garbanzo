@@ -91,7 +91,7 @@ function changeStroke(change) {
             // ctx.strokeStyle = "#df4b26"
             break;
         case 'clear':
-            // ctx.strokeStyle = "#df4b26"
+            socket.emit('clearcanvas')
             break;    
     }
 }

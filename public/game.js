@@ -12,6 +12,7 @@ var clickX = [],
     playerData = {},
     self = {},
     players = [],
+    color = '#ff0000'
     playerCount = 0,
     i = 1
 
@@ -68,27 +69,29 @@ function checkTurn(){
 }
 
 function changeStroke(change) {
+    console.log(change)
     switch(change) {
         case 'red':
-            ctx.strokeStyle = "#df4b26"
+            color = "#df4b26"
             break;
         case 'green':
-            ctx.strokeStyle = "#df4b26"
+            console.log('green')
+            color = "#df4b26"
             break;
         case 'blue':
-            ctx.strokeStyle = "#df4b26"
+            color = "#df4b26"
             break;
         case 'brown':
-            ctx.strokeStyle = "#df4b26"
+            color = "#df4b26"
             break;
         case 'yellow':
-            ctx.strokeStyle = "#df4b26"
+            color = "#df4b26"
             break;
         case 'black':
-            ctx.strokeStyle = "#df4b26"
+            color = "#df4b26"
             break;
         case 'eraser':
-            // ctx.strokeStyle = "#df4b26"
+            color = '#ffffff'
             break;
         case 'clear':
             socket.emit('clearcanvas')
@@ -252,13 +255,13 @@ requestAnimationFrame(main)
 
 function redraw() {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height) // Clears the canvas
-  
-    ctx.strokeStyle = "#df4b26"
+
     ctx.lineJoin = "round"
     ctx.lineWidth = 5
 			
     for(var i=0; i < clickX.length; i++) {		
         ctx.beginPath()
+        ctx.strokeStyle = color
         if(clickDrag[i] && i)
             ctx.moveTo(clickX[i-1], clickY[i-1])
         else
@@ -272,9 +275,9 @@ function redraw() {
         let player = playerData[id]
         if(id != self.id){
             let drawData = player.drawData
-            ctx.strokeStyle = player.color
             for(let i=0; i<drawData.length; i++){
                 ctx.beginPath()
+                ctx.strokeStyle = drawData[i].color
                 if(drawData[i].dragging && i)
                     ctx.moveTo(drawData[i-1].x, drawData[i-1].y)   
                 else

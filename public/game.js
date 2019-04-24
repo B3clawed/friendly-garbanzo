@@ -67,13 +67,14 @@ function checkTurn(){
     }
 }
 
-function changeStroke(change) {
+function changeStroke() {
+    var change = document.getElementById("colorSelect").value
     switch(change) {
         case 'red':
             ctx.strokeStyle = "#df4b26"
             break;
         case 'green':
-            ctx.strokeStyle = "#df4b26"
+            ctx.strokeStyle = "#00ff00"
             break;
         case 'blue':
             ctx.strokeStyle = "#df4b26"

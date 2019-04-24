@@ -11,11 +11,7 @@ html {
 /* https://steamuserimages-a.akamaihd.net/ugc/100603690261137482/D09D43F7AF5CE184E5A79C3A8F706B2A3BB64E2F/ */
 /* https://i.pinimg.com/originals/fe/78/bb/fe78bbb25f35d56b502327fb6d43b309.png */
 
-.upperSpace {
-   display: flex;
-   flex-direction: row;
-   justify-content: center;
- }
+
 
 #countdowntimer {
   float: left;
@@ -45,6 +41,10 @@ html {
 }
 
  table {
+   flex-basis: 20%;
+ }
+
+ #tiles {
    flex-basis: 20%;
  }
 

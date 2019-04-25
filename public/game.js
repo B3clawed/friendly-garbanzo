@@ -6,13 +6,12 @@ var socket,
     canvasTop = rect.top,
     drawing = false,
     canDraw = true
-var clickX = [],
-    clickY = [],
+var selfDrawData = [],
     clickDrag = [],
     playerData = {},
     self = {},
     players = [],
-    color = '#ff0000'
+    color = '#ff0000',
     playerCount = 0,
     i = 1
 
@@ -45,10 +44,8 @@ document.onmousemove = function (e) {
 
 function addClick (x, y, dragging) {
     if(self.turn & canDraw){
-        clickX.push(x)
-        clickY.push(y)
-        clickDrag.push(dragging)
-        socket.emit('drawdata', {dragging: dragging, x: x, y: y})
+        selfDrawData.push({dragging: dragging, x: x, y: y, color: color})
+        socket.emit('drawdata', {dragging: dragging, x: x, y: y, color: color})
     }
 }
 
@@ -68,34 +65,34 @@ function checkTurn(){
     }
 }
 
-function changeStroke() {
+function clearCanvas() {
+    socket.emit('clearcanvas')
+}
+
+function changeStroke(stroke) {
     var change = document.getElementById("colorSelect").value
     switch(change) {
         case 'red':
-            color = "#df4b26"
+            color = "#ff0000"
             break;
         case 'green':
-            ctx.strokeStyle = "#00ff00"
+            color = "#00ff00"
             break;
         case 'blue':
-            color = "#df4b26"
+            color = "#0000ff"
             break;
         case 'brown':
-            color = "#df4b26"
+            color = "#654321"
             break;
         case 'yellow':
-            color = "#df4b26"
+            color = "#ffff00"
             break;
         case 'black':
-            color = "#df4b26"
+            color = "#000000"
             break;
-        case 'eraser':
-            color = '#ffffff'
-            break;
-        case 'clear':
-            socket.emit('clearcanvas')
-            break;    
     }
+    if(stroke == 'eraser')
+        color = '#ffffff'
 }
 
 function choosingOn(name) {
@@ -167,9 +164,7 @@ function connect(e) {
         })
         
         socket.on('clearcanvas', ()=>{
-            clickX = []
-            clickY = []
-            clickDrag = []
+            selfDrawData = []
         })
         
         socket.on('playerdata', (players) => {
@@ -258,14 +253,14 @@ function redraw() {
     ctx.lineJoin = "round"
     ctx.lineWidth = 5
 			
-    for(var i=0; i < clickX.length; i++) {		
+    for(var i=0; i < selfDrawData.length; i++) {		
         ctx.beginPath()
-        ctx.strokeStyle = color
-        if(clickDrag[i] && i)
-            ctx.moveTo(clickX[i-1], clickY[i-1])
+        ctx.strokeStyle = selfDrawData[i].color
+        if(selfDrawData[i].dragging && i)
+            ctx.moveTo(selfDrawData[i-1].x, selfDrawData[i-1].y)
         else
-            ctx.moveTo(clickX[i]-1, clickY[i])       
-        ctx.lineTo(clickX[i], clickY[i])
+            ctx.moveTo(selfDrawData[i].x-1, selfDrawData[i].y)       
+        ctx.lineTo(selfDrawData[i].x, selfDrawData[i].y)
         ctx.closePath()
         ctx.stroke()
     }

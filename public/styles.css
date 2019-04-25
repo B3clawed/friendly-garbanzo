@@ -1,23 +1,27 @@
+
 html {
   overflow-y: auto;
+  background-image: url("https://i.pinimg.com/originals/29/55/e2/2955e2567f366d2890da3caaf9fde13b.gif");
+  background-size: cover;
 }
 
- .upperSpace {
-   display: flex;
-   flex-direction: row;
-   justify-content: center;
- }
+/* https://cdnb.artstation.com/p/assets/images/images/011/513/619/original/james-doyle-2-1.gif?1529970112 */
+/* https://steamuserimages-a.akamaihd.net/ugc/100603690261756602/010C72743B9DC679F81539B585332727078800FB/ */
+/* https://steamuserimages-a.akamaihd.net/ugc/100603690264825367/868A468EFB1E097C58700B612C50AA4D7C76CD73/ */
+/* https://steamuserimages-a.akamaihd.net/ugc/100603690261137482/D09D43F7AF5CE184E5A79C3A8F706B2A3BB64E2F/ */
+/* https://i.pinimg.com/originals/fe/78/bb/fe78bbb25f35d56b502327fb6d43b309.png */
+
+
 
 #countdowntimer {
   float: left;
   display: absolute;
-  border-style: solid;
-  border-width: 1px;
   font-size: 65px;
   width: 100px;
   height: 100px;
   text-align: center;
   visibility: hidden;
+  color: #f20000;
 }
 
 #underscore {
@@ -27,6 +31,7 @@ html {
   font-size: 75px;
   letter-spacing: 4px;
   visibility: hidden;
+  color: #f20000;
 }
 
 .main {
@@ -39,11 +44,16 @@ html {
    flex-basis: 20%;
  }
 
+ #tiles {
+   flex-basis: 20%;
+ }
+
  #canvas {
   border-style: solid;
-  background-color: rgba(0,0,0,0);
+  background-color: rgb(255, 255, 255);
   border-width: 3px;
   position: absolute;
+
 }
 
 #canvasDiv {

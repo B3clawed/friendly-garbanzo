@@ -68,15 +68,14 @@ function checkTurn(){
     }
 }
 
-function changeStroke(change) {
-    console.log(change)
+function changeStroke() {
+    var change = document.getElementById("colorSelect").value
     switch(change) {
         case 'red':
             color = "#df4b26"
             break;
         case 'green':
-            console.log('green')
-            color = "#df4b26"
+            ctx.strokeStyle = "#00ff00"
             break;
         case 'blue':
             color = "#df4b26"
@@ -247,7 +246,7 @@ function wordChoicesOn() {
   
 function wordChoicesOff() {
     document.getElementById("canvasButtons").style.display = "none"
-    document.getElementById("canvas").style.backgroundColor = 'rgba(0,0,0,0)'
+    document.getElementById("canvas").style.backgroundColor = 'rgba(255,255,255)'
     canDraw = true              
 }
  

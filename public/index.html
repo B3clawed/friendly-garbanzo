@@ -17,15 +17,26 @@
       <div></div>
     <!-- </div> -->
 
-    <div class="main">
-      <table class="table">
+   <div class="main">
+      <!-- <table class="table">
         <thead>
           <th>Name</th>
           <th>Points</th>
         </thead>
         <tbody id="hotBody">
         </tbody>
-      </table>
+      </table> -->
+
+      <div class="tile is-ancestor" id='tiles'>
+        <div class="tile is-4 is-vertical">
+          <div class="tile">
+            <p>lol</p>
+          </div>
+          <div class="tile">
+            <p>lols</p>
+          </div>
+        </div>
+      </div>
 
       <div id="canvasDiv">
           <canvas id='canvas' width='800' height='600'></canvas>
@@ -76,13 +87,13 @@
 
       
         <div class="select is-rounded">
-            <select>
-              <option style="background:red;" onclick="changeStroke('red')">Red</option>
-              <option style="background:rgb(7, 192, 7);" onclick="changeStroke('green')">Green</option>
-              <option style="background:rgb(6, 91, 248);" onclick="changeStroke('blue')">Blue</option>
-              <option style="background:rgb(121, 36, 36); color:white;" onclick="changeStroke('brown')">Brown</option>
-              <option style="background:yellow;" onclick="changeStroke('yellow')">Yellow</option>
-              <option style="background:black; color:white;" onclick="changeStroke('black')">Black</option>
+            <select onchange="changeStroke()" id="colorSelect">
+              <option style="background:red;" value="red">Red</option>
+              <option style="background:rgb(7, 192, 7);" value="green">Green</option>
+              <option style="background:rgb(6, 91, 248);" value="blue">Blue</option>
+              <option style="background:rgb(121, 36, 36); color:white;" value="brown">Brown</option>
+              <option style="background:yellow;" value="yellow">Yellow</option>
+              <option style="background:black; color:white;" value="black">Black</option>
             </select>
           </div>
 

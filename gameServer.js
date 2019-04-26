@@ -24,7 +24,7 @@ module.exports = class gameServer{
             socket.on('clearcanvas', () => {
                 if(this.players[socket.id].turn){
                     this.players[socket.id].drawData = []
-                    this.io.emit('playerdata', this.players)
+                    io.emit('playerdata', this.players)
                     io.emit('clearcanvas')
                 }
             })
@@ -52,7 +52,7 @@ module.exports = class gameServer{
             socket.on('drawdata', (data) => {
                 if(this.players[socket.id].turn){
                     this.players[socket.id].drawData.push(data)
-                    socket.broadcast.emit('drawdata', {id: socket.id, dragging: data.dragging ? data.dragging : false, x: data.x, y: data.y})
+                    socket.broadcast.emit('drawdata', {id: socket.id, dragging: data.dragging ? data.dragging : false, x: data.x, y: data.y, color: data.color})
                 }
             })
         })
@@ -65,7 +65,6 @@ module.exports = class gameServer{
                 name: data.name,
                 choosingWord: false,
                 turn: false,
-                color: '#df4b26',
                 drawData: []
             }
         )

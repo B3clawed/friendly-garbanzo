@@ -6,13 +6,12 @@ var socket,
     canvasTop = rect.top,
     drawing = false,
     canDraw = true
-var clickX = [],
-    clickY = [],
+var selfDrawData = [],
     clickDrag = [],
     playerData = {},
     self = {},
     players = [],
-    color = '#ff0000'
+    color = '#ff0000',
     playerCount = 0,
     i = 1
 
@@ -45,10 +44,8 @@ document.onmousemove = function (e) {
 
 function addClick (x, y, dragging) {
     if(self.turn & canDraw){
-        clickX.push(x)
-        clickY.push(y)
-        clickDrag.push(dragging)
-        socket.emit('drawdata', {dragging: dragging, x: x, y: y})
+        selfDrawData.push({dragging: dragging, x: x, y: y, color: color})
+        socket.emit('drawdata', {dragging: dragging, x: x, y: y, color: color})
     }
 }
 
@@ -68,34 +65,34 @@ function checkTurn(){
     }
 }
 
-function changeStroke() {
+function clearCanvas() {
+    socket.emit('clearcanvas')
+}
+
+function changeStroke(stroke) {
     var change = document.getElementById("colorSelect").value
     switch(change) {
         case 'red':
-            color = "#df4b26"
+            color = "#ff0000"
             break;
         case 'green':
-            ctx.strokeStyle = "#00ff00"
+            color = "#00ff00"
             break;
         case 'blue':
-            color = "#df4b26"
+            color = "#0000ff"
             break;
         case 'brown':
-            color = "#df4b26"
+            color = "#654321"
             break;
         case 'yellow':
-            color = "#df4b26"
+            color = "#ffff00"
             break;
         case 'black':
-            color = "#df4b26"
+            color = "#000000"
             break;
-        case 'eraser':
-            color = '#ffffff'
-            break;
-        case 'clear':
-            socket.emit('clearcanvas')
-            break;    
     }
+    if(stroke == 'eraser')
+        color = '#ffffff'
 }
 
 function choosingOn(name) {
@@ -152,6 +149,31 @@ function setPlayers() {
 
 function connect(e) {
     if(e == 69 || e.keyCode == 13) {
+        var num = Math.floor(Math.random()*7),
+            link
+        switch(num) {
+            case 0:
+                link = "https://i.pinimg.com/originals/fe/78/bb/fe78bbb25f35d56b502327fb6d43b309.png"
+                break;
+            case 1:
+                link = "https://cdnb.artstation.com/p/assets/images/images/011/513/619/original/james-doyle-2-1.gif?1529970112"
+                break;
+            case 2:
+                link = "https://steamuserimages-a.akamaihd.net/ugc/100603690261756602/010C72743B9DC679F81539B585332727078800FB/"
+                break;
+            case 3:
+                link = "https://steamuserimages-a.akamaihd.net/ugc/100603690264825367/868A468EFB1E097C58700B612C50AA4D7C76CD73/"
+                break;
+            case 4:
+                link = "https://steamuserimages-a.akamaihd.net/ugc/100603690261137482/D09D43F7AF5CE184E5A79C3A8F706B2A3BB64E2F/"
+                break;
+            case 5:
+                link = "https://i.pinimg.com/originals/29/55/e2/2955e2567f366d2890da3caaf9fde13b.gif"
+                break;
+        }
+
+        document.getElementById("html").style.backgroundImage = `url('${link}')`
+
         var name = document.getElementById("userNameInput").value
         document.getElementById("userNameInput").value = ""
 
@@ -167,9 +189,7 @@ function connect(e) {
         })
         
         socket.on('clearcanvas', ()=>{
-            clickX = []
-            clickY = []
-            clickDrag = []
+            selfDrawData = []
         })
         
         socket.on('playerdata', (players) => {
@@ -258,14 +278,14 @@ function redraw() {
     ctx.lineJoin = "round"
     ctx.lineWidth = 5
 			
-    for(var i=0; i < clickX.length; i++) {		
+    for(var i=0; i < selfDrawData.length; i++) {		
         ctx.beginPath()
-        ctx.strokeStyle = color
-        if(clickDrag[i] && i)
-            ctx.moveTo(clickX[i-1], clickY[i-1])
+        ctx.strokeStyle = selfDrawData[i].color
+        if(selfDrawData[i].dragging && i)
+            ctx.moveTo(selfDrawData[i-1].x, selfDrawData[i-1].y)
         else
-            ctx.moveTo(clickX[i]-1, clickY[i])       
-        ctx.lineTo(clickX[i], clickY[i])
+            ctx.moveTo(selfDrawData[i].x-1, selfDrawData[i].y)       
+        ctx.lineTo(selfDrawData[i].x, selfDrawData[i].y)
         ctx.closePath()
         ctx.stroke()
     }

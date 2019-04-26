@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html id="html">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -61,31 +61,30 @@
       </div>
     </div>
     <div class="lowerSide"> 
-      
-      <p class="buttons">
+      <p class="buttons" id="icons">
         <a class="button">
           <span class="icon is-small">
-            <i class="fas fa-trash fa-2x" onclick="changeStroke('clear')"></i>
+            <i class="fas fa-trash fa-2x" onclick="clearCanvas()"></i>
           </span>
         </a>
-        <a class="button">
+
+        <a class="button" id="icons">
           <span class="icon is-small">
             <i class="fas fa-eraser fa-2x" onclick="changeStroke('eraser')"></i>
           </span>
         </a>
       </p>
 
-      
-        <div class="select is-rounded">
-            <select onchange="changeStroke()" id="colorSelect">
-              <option style="background:red;" value="red">Red</option>
-              <option style="background:rgb(7, 192, 7);" value="green">Green</option>
-              <option style="background:rgb(6, 91, 248);" value="blue">Blue</option>
-              <option style="background:rgb(121, 36, 36); color:white;" value="brown">Brown</option>
-              <option style="background:yellow;" value="yellow">Yellow</option>
-              <option style="background:black; color:white;" value="black">Black</option>
-            </select>
-          </div>
+      <div class="select is-rounded" id="icons">
+          <select onchange="changeStroke()" id="colorSelect">
+            <option style="background:red;" value="red">Red</option>
+            <option style="background:rgb(7, 192, 7);" value="green">Green</option>
+            <option style="background:rgb(6, 91, 248);" value="blue">Blue</option>
+            <option style="background:rgb(121, 36, 36); color:white;" value="brown">Brown</option>
+            <option style="background:yellow;" value="yellow">Yellow</option>
+            <option style="background:black; color:white;" value="black">Black</option>
+          </select>
+        </div>
 
           
     </div>

@@ -30,10 +30,14 @@ module.exports = class gameServer{
             })
 
             socket.on('message', (data) => {
-                if(data.message.toLowerCase() == this.gameSettings.word.toLowerCase() && this.players[socket.id].turn == false){
+                let player = this.players[socket.id]
+                if(data.message.toLowerCase() == this.gameSettings.word.toLowerCase() && player.turn == false && !player.guessed){
+                    this.players[socket.id].points += 1
+                    this.players[socket.id].guessed = true
                     io.emit('message', {name: 'GAME', message: `${this.players[socket.id].name} has guessed the word correctly!`})
+                    io.emit('playerdata', this.players)
                 }
-                else
+                else if(!player.guessed)
                     socket.broadcast.emit('message', {name: this.players[socket.id].name, message: data.message})
             })
 
@@ -65,6 +69,8 @@ module.exports = class gameServer{
                 name: data.name,
                 choosingWord: false,
                 turn: false,
+                points: 0,
+                guessed: false,
                 drawData: []
             }
         )
@@ -76,6 +82,10 @@ module.exports = class gameServer{
         this.players[socket.id].choosingWord = false
         this.io.emit('playerdata', this.players)
         setTimeout(() => {
+            for(let id in this.players){
+                let plr = this.players[id]
+                plr.guessed = false
+            }
             if(this.players[socket.id]){
                 this.players[socket.id].turn = false
                 this.players[socket.id].drawData = []

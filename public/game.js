@@ -57,6 +57,7 @@ function main() {
 function checkTurn(){
     for(let id in playerData){
         let plr = playerData[id]
+        document.querySelector(`#${id} > td`).innerHTML = plr.points
         if(plr.turn) {
             document.getElementById(plr.id).style.backgroundColor = "#23d160"
         } if(plr.choosingWord && id != socket.id){
@@ -149,7 +150,7 @@ function setPlayers() {
 
 function connect(e) {
     if(e == 69 || e.keyCode == 13) {
-        var num = Math.floor(Math.random()*7),
+        var num = Math.floor(Math.random() * (5)),
             link
         switch(num) {
             case 0:

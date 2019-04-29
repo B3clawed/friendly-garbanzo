@@ -159,13 +159,13 @@ function connect(e) {
                 link = "https://cdnb.artstation.com/p/assets/images/images/011/513/619/original/james-doyle-2-1.gif?1529970112"
                 break;
             case 2:
-                link = "https://steamuserimages-a.akamaihd.net/ugc/100603690261756602/010C72743B9DC679F81539B585332727078800FB/"
+                link = "https://wallpapercave.com/wp/wp2873698.png"
                 break;
             case 3:
-                link = "https://steamuserimages-a.akamaihd.net/ugc/100603690264825367/868A468EFB1E097C58700B612C50AA4D7C76CD73/"
+                link = "https://i.pinimg.com/originals/7f/37/66/7f37663404c54de8415aac99a1d1bb1b.jpg"
                 break;
             case 4:
-                link = "https://steamuserimages-a.akamaihd.net/ugc/100603690261137482/D09D43F7AF5CE184E5A79C3A8F706B2A3BB64E2F/"
+                link = "http://paperlief.com/images/cute-pixel-art-wallpaper-3.jpg"
                 break;
             case 5:
                 link = "https://i.pinimg.com/originals/29/55/e2/2955e2567f366d2890da3caaf9fde13b.gif"

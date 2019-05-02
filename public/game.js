@@ -178,7 +178,7 @@ function connect(e) {
         var name = document.getElementById("userNameInput").value
         document.getElementById("userNameInput").value = ""
 
-        socket = io.connect('http://127.0.0.1:3000')
+        socket = io.connect('http://T308022:3000')
         socket.emit('login', {name: name})
 
         socket.on('drawdata', (data) => {

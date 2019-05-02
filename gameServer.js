@@ -4,7 +4,8 @@ module.exports = class gameServer{
         this.gameSettings = {
             timer: 30,
             word: '',
-            turnIdx: 0
+            turnIdx: 0,
+            guessedCount: 0
         }
         this.players = {}
 
@@ -14,7 +15,7 @@ module.exports = class gameServer{
 
             socket.on('login', (data) => {
                 this.addPlayer({socket: socket, name: data.name}, (player) => {
-                    if(Object.keys(this.players).length == 2)
+                    if(Object.keys(this.players).length == 2 && !this.middleOfTurn())
                         this.nextTurn()
                     socket.emit('hello', player)
                     io.emit('playerdata', this.players)
@@ -34,6 +35,9 @@ module.exports = class gameServer{
                 if(data.message.toLowerCase() == this.gameSettings.word.toLowerCase() && player.turn == false && !player.guessed){
                     this.players[socket.id].points += 1
                     this.players[socket.id].guessed = true
+                    this.gameSettings.guessedCount += 1
+                    if(this.gameSettings.guessedCount == Object.keys(this.players).length-1)
+                        this.endTurn(this.gameSettings.currentTurn)
                     io.emit('message', {name: 'GAME', message: `${this.players[socket.id].name} has guessed the word correctly!`})
                     io.emit('playerdata', this.players)
                 }
@@ -45,6 +49,8 @@ module.exports = class gameServer{
                 delete this.players[socket.id]
                 if(Object.keys(this.players).length == 0)
                     this.reset()
+                if(this.player[socket.id].turn)
+                    this.nextTurn()
                 io.emit('playerdata', this.players)
             })
 
@@ -77,29 +83,39 @@ module.exports = class gameServer{
     }
 
     startTurn(socket, level){
+        console.log(`${this.players[socket.id].name}'s turn start.`)
         this.gameSettings.word = this.currentWords[level]
         this.io.emit('startturn', {id: socket.id, word: toUnderscores(this.gameSettings.word)})
+        this.gameSettings.currentTurn = socket.id
         this.players[socket.id].choosingWord = false
         this.io.emit('playerdata', this.players)
         setTimeout(() => {
-            for(let id in this.players){
-                let plr = this.players[id]
-                plr.guessed = false
-            }
-            if(this.players[socket.id]){
-                this.players[socket.id].turn = false
-                this.players[socket.id].drawData = []
-                this.io.emit('playerdata', this.players)
-            }
-            this.nextTurn()
+            if(this.players[socket.id].turn)
+                this.endTurn(socket.id)
         }, this.gameSettings.timer * 1000)
+    }
+
+    endTurn(id){
+        console.log(`${this.players[id].name}'s turn ended.`)
+        for(let id in this.players){
+            let plr = this.players[id]
+            plr.guessed = false
+        }
+        this.gameSettings.guessedCount = 0
+        if(this.players[id]){
+            this.players[id].turn = false
+            this.players[id].drawData = []
+            this.io.emit('playerdata', this.players)
+        }
+        this.nextTurn()
     }
 
     reset(){
         this.gameSettings = {
             timer: 30,
             word: '',
-            turnIdx: 0
+            turnIdx: 0,
+            guessedCount: 0
         }
     }
 
@@ -117,6 +133,15 @@ module.exports = class gameServer{
             i++
         }
         this.gameSettings.turnIdx++
+    }
+
+    middleOfTurn(){
+        for(let id in this.players){
+            let plr = this.players[id]
+            if(plr.turn)
+                return true
+        }
+        return false
     }
 
     randomTurn(){

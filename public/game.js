@@ -258,6 +258,9 @@ function level3Click(){
     startTimer(30)
 }
 
+function changeWidth() {
+    
+}
 
 function wordChoicesOn() {
     document.getElementById("canvasButtons").style.display = "block"

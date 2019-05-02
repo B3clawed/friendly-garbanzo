@@ -61,33 +61,47 @@
       </div>
     </div>
     <div class="lowerSide"> 
-      <p class="buttons" id="icons">
-        <a class="button">
+      <!-- Icons -->
+        <a class="button" id="rectangle">
           <span class="icon is-small">
             <i class="fas fa-trash fa-2x" onclick="clearCanvas()"></i>
           </span>
         </a>
 
-        <a class="button" id="icons">
+        <a class="button" id="rectangle">
           <span class="icon is-small">
             <i class="fas fa-eraser fa-2x" onclick="changeStroke('eraser')"></i>
           </span>
         </a>
-      </p>
+        <div class="lineSizes">
+          <a class="button" id="rectangle">
+            <span class="icon is-small">
+              <div class="circle" id="circleOne" onclick=changeWidth()></div>
+            </span>
+          </a>
 
-      <div class="select is-rounded" id="icons">
-          <select onchange="changeStroke()" id="colorSelect">
-            <option style="background:red;" value="red">Red</option>
-            <option style="background:rgb(7, 192, 7);" value="green">Green</option>
-            <option style="background:rgb(6, 91, 248);" value="blue">Blue</option>
-            <option style="background:rgb(121, 36, 36); color:white;" value="brown">Brown</option>
-            <option style="background:yellow;" value="yellow">Yellow</option>
-            <option style="background:black; color:white;" value="black">Black</option>
-          </select>
+          <a class="button" id="rectangle">
+            <span class="icon is-small">
+              <div class="circle" id="circleTwo" onclick=changeWidth()></div>
+            </span>
+          </a>
+
+          <a class="button" id="rectangle">
+            <span class="icon is-small">
+              <div class="circle" id="circleThree" onclick=changeWidth()></div>
+            </span>
+          </a>
         </div>
 
-          
-    </div>
+        <!-- Colors -->
+        <a class="button" id="rectangle" style="background-color: red"></a>
+        <a class="button" id="rectangle" style="background-color: rgb(7, 192, 7)"></a>
+        <a class="button" id="rectangle" style="background-color: rgb(6, 91, 248)"></a>
+        <a class="button" id="rectangle" style="background-color: rgb(121, 36, 36)"></a>
+        <a class="button" id="rectangle" style="background-color: yellow"></a>
+        <a class="button" id="rectangle" style="background-color: black"></a>
+
+      </div>
 
     <div id="loginMenu" class="modal is-active">
         <div class="modal-background"></div>

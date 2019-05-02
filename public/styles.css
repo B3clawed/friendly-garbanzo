@@ -80,6 +80,7 @@ html {
   margin-right: 2%;
   overflow-y: auto; 
   height:600px;
+  background-color: white;
 }
 
 .message-body {
@@ -92,10 +93,55 @@ html {
   display: flex;
 }
 
-.lowerSide {
-  margin-top: 25px;
-  display: flex;
-  justify-content: center
+#chatArea {
+  margin-right: 10px;
 }
 
+.lowerSide {
+  margin-top: 25px;
+  margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.lineSizes {
+  display: flex;
+  flex-direction: row;
+}
+
+#icons {
+  margin-right: 10px;
+}
+
+#rectangle {
+  width: 40px;
+  height: 40px;
+  background-color: #ffffff;
+  margin-right: 10px;
+  /* text-align: center; */
+}
+
+.circle {
+  background-color: black;
+  border-radius: 50%;
+}
+
+#circleOne {
+  width: 7px;
+  height: 7px;
+  /* margin: 35% auto; */
+}
+
+#circleTwo {
+  width: 14px;
+  height: 14px;
+  /* margin: 23% auto; */
+}
+
+#circleThree {
+  width: 24px;
+  height: 24px;
+  margin: 12% auto;
+}
 

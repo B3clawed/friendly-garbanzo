@@ -1,6 +1,9 @@
 module.exports = class gameServer{
     constructor(io){
         this.io = io
+        this.words = {
+            easy: ["bench","sheep","lizard","bird","airplane","bounce","bathroom","candy","rain","football","pizza","rock","door","backpack","bread","drum","angel","desk","daisy","mouse","zigzag","smile","banana","table","curl","basketball","milk","swing","rocket","comb","feet","socks","crayon","worm","tree","grass","heart","beak","diamond","circle","turtle","cupcake","ears","swimming pool","cookie","plant","night","bus","hat","corn","oval","girl","light","tail","sea turtle","blocks","helicopter","kite","face","book","square","pen","bunk bed","baseball","king","flower","rabbit","Earth","coat","fork","bow","bumblebee","baby","line","person","alligator","seashell","pillow","knee","ball","window","fish","car","pie","key","frog","rainbow","horse","truck","snake","bike","bunny","ant","music","grapes","feather","chicken","kitten","fire","spider","pencil","whale","duck","bone","star","bee","jail","chair","beach","bed","hook","snowman","leg","bowl","jacket","box","chimney","eye","bracelet","cow","clock","branch","sun","owl","motorcycle","jellyfish","eyes","love","camera","ladybug","head","house","flag","finger","triangle","bear","mountains","legs","slide","coin","lemon","cup","roly poly","sea","spider web","glasses","cat","button","Mickey Mouse","cube","boat","apple","dragon","hippo","family","starfish","mountain","cheese","elephant","balloon","woman","man","moon","dinosaur","monkey","robot","octopus","ice cream cone","hair","neck","lollipop","lamp","wheel","snowflake","bark","crack","snail","mouth","carrot","shoe","bug","ants","lips","jar","dog","train","zoo","purse","nail","ring","water","float","bridge","river","mitten","spoon","inchworm","broom","hand","arm","stairs","giraffe","crab","butterfly","blanket","caterpillar","orange","bell","cherry","alive","doll","popsicle","ocean","suitcase","bat","pig","ear","nose","egg","leaf","zebra","computer","monster","candle","shirt","lion","sunglasses","cloud","pants","fly","skateboard","island","boy","ship","dream","hamburger","ghost"]
+        }
         this.gameSettings = {
             timer: 30,
             word: '',
@@ -46,11 +49,15 @@ module.exports = class gameServer{
             })
 
             socket.once('disconnect', () => {
-                delete this.players[socket.id]
+                if(this.players[socket.id]){
+                    if(this.players[socket.id].turn)
+                        this.endTurn(socket.id)
+
+                    delete this.players[socket.id]
+                }
+                
                 if(Object.keys(this.players).length == 0)
                     this.reset()
-                if(this.player[socket.id].turn)
-                    this.nextTurn()
                 io.emit('playerdata', this.players)
             })
 
@@ -75,6 +82,7 @@ module.exports = class gameServer{
                 name: data.name,
                 choosingWord: false,
                 turn: false,
+                turnCount: 0,
                 points: 0,
                 guessed: false,
                 drawData: []
@@ -83,14 +91,16 @@ module.exports = class gameServer{
     }
 
     startTurn(socket, level){
-        console.log(`${this.players[socket.id].name}'s turn start.`)
+        let plr = this.players[socket.id]
+        console.log(`${plr.name}'s turn start.`)
         this.gameSettings.word = this.currentWords[level]
         this.io.emit('startturn', {id: socket.id, word: toUnderscores(this.gameSettings.word)})
         this.gameSettings.currentTurn = socket.id
-        this.players[socket.id].choosingWord = false
+        plr.choosingWord = false
+        let thisCount = ++plr.turnCount
         this.io.emit('playerdata', this.players)
         setTimeout(() => {
-            if(this.players[socket.id].turn)
+            if(plr.turn && thisCount == plr.turnCount)
                 this.endTurn(socket.id)
         }, this.gameSettings.timer * 1000)
     }
@@ -160,10 +170,27 @@ module.exports = class gameServer{
         let socket = this.io.sockets.connected[id]
         this.players[id].choosingWord = true
         this.io.emit('playerdata', this.players)
-        this.currentWords = ['Football','Elephant','Moldy Cheese']
+        this.currentWords = getRandomWords()
         this.io.emit('clearcanvas')
-        socket.emit('wordChoices', {level1: 'Football', level2: 'Elephant', level3: 'Moldy Cheese'})
+        socket.emit('wordChoices', {level1: this.currentWords[0], level2: this.currentWords[1], level3: this.currentWords[2]})
     }
+}
+
+function getRandomWords(){
+    let easy = ["bench","sheep","lizard","bird","airplane","bounce","bathroom","candy","rain","football","pizza","rock","door","backpack","bread","drum","angel","desk","daisy","mouse","zigzag","smile","banana","table","curl","basketball","milk","swing","rocket","comb","feet","socks","crayon","worm","tree","grass","heart","beak","diamond","circle","turtle","cupcake","ears","swimming pool","cookie","plant","night","bus","hat","corn","oval","girl","light","tail","sea turtle","blocks","helicopter","kite","face","book","square","pen","bunk bed","baseball","king","flower","rabbit","Earth","coat","fork","bow","bumblebee","baby","line","person","alligator","seashell","pillow","knee","ball","window","fish","car","pie","key","frog","rainbow","horse","truck","snake","bike","bunny","ant","music","grapes","feather","chicken","kitten","fire","spider","pencil","whale","duck","bone","star","bee","jail","chair","beach","bed","hook","snowman","leg","bowl","jacket","box","chimney","eye","bracelet","cow","clock","branch","sun","owl","motorcycle","jellyfish","eyes","love","camera","ladybug","head","house","flag","finger","triangle","bear","mountains","legs","slide","coin","lemon","cup","roly poly","sea","spider web","glasses","cat","button","Mickey Mouse","cube","boat","apple","dragon","hippo","family","starfish","mountain","cheese","elephant","balloon","woman","man","moon","dinosaur","monkey","robot","octopus","ice cream cone","hair","neck","lollipop","lamp","wheel","snowflake","bark","crack","snail","mouth","carrot","shoe","bug","ants","lips","jar","dog","train","zoo","purse","nail","ring","water","float","bridge","river","mitten","spoon","inchworm","broom","hand","arm","stairs","giraffe","crab","butterfly","blanket","caterpillar","orange","bell","cherry","alive","doll","popsicle","ocean","suitcase","bat","pig","ear","nose","egg","leaf","zebra","computer","monster","candle","shirt","lion","sunglasses","cloud","pants","fly","skateboard","island","boy","ship","dream","hamburger","ghost"],
+        rnd1 = random(0, easy.length),
+        rnd2 = random(0, easy.length),
+        rnd3 = random(0, easy.length)
+
+    while(rnd2 == rnd3 || rnd2 == rnd1){
+        rnd2 = random(0, easy.length)
+    }
+
+    while(rnd3 == rnd1){
+        rnd3 = random(0, easy.length)
+    }
+
+    return [easy[rnd1], easy[rnd2], easy[rnd3]]
 }
 
 function toUnderscores(word){

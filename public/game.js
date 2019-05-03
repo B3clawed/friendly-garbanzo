@@ -57,7 +57,8 @@ function main() {
 function checkTurn(){
     for(let id in playerData){
         let plr = playerData[id]
-        document.querySelector(`#${id} > td`).innerHTML = plr.points
+        //document.querySelector(`#${id} > td`).innerHTML = plr.points
+        document.getElementById(`${id}`).children[1].innerHTML = plr.points
         if(plr.turn) {
             document.getElementById(plr.id).style.backgroundColor = "#23d160"
         } if(plr.choosingWord && id != socket.id){

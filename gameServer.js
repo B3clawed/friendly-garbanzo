@@ -44,7 +44,7 @@ module.exports = class gameServer{
                     io.emit('message', {name: 'GAME', message: `${this.players[socket.id].name} has guessed the word correctly!`})
                     io.emit('playerdata', this.players)
                 }
-                else if(!player.guessed)
+                else if(!player.guessed && player.turn == false)
                     socket.broadcast.emit('message', {name: this.players[socket.id].name, message: data.message})
             })
 

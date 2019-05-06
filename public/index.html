@@ -18,16 +18,27 @@
     <!-- </div> -->
 
    <div class="main">
-      <table class="table">
+      <!-- <table class="table">
         <thead>
           <th>Name</th>
           <th>Points</th>
         </thead>
         <tbody id="hotBody">
         </tbody>
-      </table>
+      </table> -->
 
-     
+    <table class=table>
+      <tbody>
+        <tr>
+          <td rowspan="2">
+            <span class="icon is-small">
+              <i class="fas fa-user fa-2x"></i>
+            </span>
+          </td>
+          <td>Kill Yourself<br>Points: 0</td>
+        </tr>
+      </tbody>
+    </table>
 
       <div id="canvasDiv">
           <canvas id='canvas' width='800' height='600'></canvas>
@@ -76,30 +87,30 @@
         <div class="lineSizes">
           <a class="button" id="rectangle">
             <span class="icon is-small">
-              <div class="circle" id="circleOne" onclick=changeWidth()></div>
+              <div class="circle" id="circleOne" onclick="changeStroke('small')"></div>
             </span>
           </a>
 
           <a class="button" id="rectangle">
             <span class="icon is-small">
-              <div class="circle" id="circleTwo" onclick=changeWidth()></div>
+              <div class="circle" id="circleTwo" onclick="changeStroke('medium')"></div>
             </span>
           </a>
 
           <a class="button" id="rectangle">
             <span class="icon is-small">
-              <div class="circle" id="circleThree" onclick=changeWidth()></div>
+              <div class="circle" id="circleThree" onclick="changeStroke('large')"></div>
             </span>
           </a>
         </div>
 
         <!-- Colors -->
-        <a class="button" id="rectangle" style="background-color: red"></a>
-        <a class="button" id="rectangle" style="background-color: rgb(7, 192, 7)"></a>
-        <a class="button" id="rectangle" style="background-color: rgb(6, 91, 248)"></a>
-        <a class="button" id="rectangle" style="background-color: rgb(121, 36, 36)"></a>
-        <a class="button" id="rectangle" style="background-color: yellow"></a>
-        <a class="button" id="rectangle" style="background-color: black"></a>
+        <a class="button" id="rectangle" style="background-color: red" onclick="changeStroke('red')"></a>
+        <a class="button" id="rectangle" style="background-color: rgb(7, 192, 7)" onclick="changeStroke('green')"></a>
+        <a class="button" id="rectangle" style="background-color: rgb(6, 91, 248)" onclick="changeStroke('blue')"></a>
+        <a class="button" id="rectangle" style="background-color: rgb(121, 36, 36)" onclick="changeStroke('brown')"></a>
+        <a class="button" id="rectangle" style="background-color: yellow" onclick="changeStroke('yellow')"></a>
+        <a class="button" id="rectangle" style="background-color: black" onclick="changeStroke('black')"></a>
 
       </div>
 

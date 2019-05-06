@@ -40,7 +40,17 @@ html {
 }
 
  table {
-   flex-basis: 20%;
+   border: 1px solid black;
+  table-layout: auto;
+  width: 200px;
+ }
+
+ table td {
+   text-align: center;
+ }
+
+ .table td {
+   vertical-align: bottom;
  }
 
  #tiles {
@@ -80,7 +90,6 @@ html {
   margin-right: 2%;
   overflow-y: auto; 
   height:600px;
-  background-color: white;
 }
 
 .message-body {

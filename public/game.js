@@ -72,8 +72,7 @@ function clearCanvas() {
 }
 
 function changeStroke(stroke) {
-    var change = document.getElementById("colorSelect").value
-    switch(change) {
+    switch(stroke) {
         case 'red':
             color = "#ff0000"
             break;
@@ -92,6 +91,7 @@ function changeStroke(stroke) {
         case 'black':
             color = "#000000"
             break;
+            
     }
     if(stroke == 'eraser')
         color = '#ffffff'
@@ -143,6 +143,12 @@ function setPlayers() {
         row.appendChild(data)
         document.getElementById('hotBody').appendChild(row)
         count++
+
+
+        var dataOne = document.createElement("td")
+        var dataTwo = document.createElement("td")
+        
+
     }
     if(document.getElementById('hotBody').childElementCount >= 2) {
         document.getElementById('moreUsersMessage').style.display = "none"
@@ -179,7 +185,7 @@ function connect(e) {
         var name = document.getElementById("userNameInput").value
         document.getElementById("userNameInput").value = ""
 
-        socket = io.connect('http://T308022:3000')
+        socket = io.connect('http://127.0.0.1:3000')
         socket.emit('login', {name: name})
 
         socket.on('drawdata', (data) => {

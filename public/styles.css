@@ -40,9 +40,9 @@ html {
 }
 
  table {
-   border: 1px solid black;
+  border: 1px solid black;
   table-layout: auto;
-  width: 200px;
+  /* width: 200px; */
  }
 
  table td {
@@ -53,27 +53,25 @@ html {
    vertical-align: bottom;
  }
 
- #tiles {
-   flex-basis: 20%;
- }
+#canvasDiv {
+  width: 800px;
+  height: 600px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
 
  #canvas {
   border-style: solid;
   background-color: rgb(255, 255, 255);
   border-width: 3px;
   position: absolute;
-
-}
-
-#canvasDiv {
-  width: 800px;
-  height: 600px;
-  position: relative;
-  display: flex;
+  left: 50%;
 }
 
 #moreUsersMessage {
   margin: auto;
+  display: none;
 }
 
 #choosingWordsMessage {

@@ -134,32 +134,52 @@ function addMessage(data){
 }
 
 function setPlayers() {
-    // document.getElementById('hotBody').innerHTML = ''
+    document.getElementById('hotBody').innerHTML = ''
 
-    // let count = 1
-    // for(let id in playerData){
-    //     let plr = playerData[id]
-    //     //document.getElementById(count).innerHTML = plr.name
-    //     var row = document.createElement("tr")
-    //     var head = document.createElement("th")
-    //     row.setAttribute("id", plr.id)
-    //     var data = document.createElement("td")
-    //     var node = document.createTextNode(plr.name);
-    //     var points = document.createTextNode("0")
-    //     data.appendChild(points)
-    //     head.appendChild(node)
-    //     row.appendChild(head)
-    //     row.appendChild(data)
-    //     document.getElementById('hotBody').appendChild(row)
-    //     count++
+    let count = 1
+    for(let id in playerData){
+        let plr = playerData[id]
+        //document.getElementById(count).innerHTML = plr.name
+        // var row = document.createElement("tr")
+        // var head = document.createElement("th")
+        // row.setAttribute("id", plr.id)
+        // var data = document.createElement("td")
+        // var node = document.createTextNode(plr.name);
+        // var points = document.createTextNode("0")
+        // data.appendChild(points)
+        // head.appendChild(node)
+        // row.appendChild(head)
+        // row.appendChild(data)
+
+        // document.getElementById('hotBody').appendChild(row)
+        // count++
 
 
-    //     var dataOne = document.createElement("td")
-    //     var dataTwo = document.createElement("td")
-        
+        var row = document.createElement("tr")
+    
+        //image
+        var dataOne = document.createElement("td")
+        dataOne.setAttribute("rowspan", 2)
+        var span = document.createElement("span")
+        span.setAttribute("class", "icon is-small")
+        var i = document.createElement("i")
+        i.setAttribute("class", "fas fa-user fa-2x")
+        span.appendChild(i)
+        dataOne.appendChild(span)
 
-    // }
-    if(Object.keys(this.playerData).length >= 2) {
+        //user
+        var dataTwo = document.createElement("td")
+        var text = ""+plr.name+"\n"+plr.points+""
+        var node = document.createTextNode(text)
+        dataTwo.appendChild(node)
+
+        row.appendChild(dataOne)
+        row.appendChild(dataTwo)
+        document.getElementById('hotBody').appendChild(row)
+
+
+    }
+    if(document.getElementById('hotBody').childElementCount >= 4) {
         document.getElementById('moreUsersMessage').style.display = "none"
     }
 }

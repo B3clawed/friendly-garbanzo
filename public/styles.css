@@ -4,6 +4,11 @@ html {
   background-size: cover;
 }
 
+html, body {
+  margin: 0;
+  height: 100%;
+}
+
 /* https://cdnb.artstation.com/p/assets/images/images/011/513/619/original/james-doyle-2-1.gif?1529970112 */
 /* https://steamuserimages-a.akamaihd.net/ugc/100603690261756602/010C72743B9DC679F81539B585332727078800FB/ */
 /* https://steamuserimages-a.akamaihd.net/ugc/100603690264825367/868A468EFB1E097C58700B612C50AA4D7C76CD73/ */
@@ -54,11 +59,11 @@ html {
  }
 
 #canvasDiv {
-  width: 800px;
+  /* width: 800px;
   height: 600px;
   position: relative;
   display: flex;
-  justify-content: center;
+  justify-content: center; */
 }
 
  #canvas {
@@ -66,7 +71,10 @@ html {
   background-color: rgb(255, 255, 255);
   border-width: 3px;
   position: absolute;
+  display: block;
   left: 50%;
+	top: 45%;
+  transform: translate(-50%,-50%);
 }
 
 #moreUsersMessage {
@@ -77,13 +85,25 @@ html {
 #choosingWordsMessage {
   display: none;
   margin: auto;
+  position: absolute;
+  left: 50%;
+	top: 45%;
+  transform: translate(-50%,-50%);
 }
 
 #canvasButtons {
   margin: auto;
+  position: absolute;
+  left: 50%;
+	top: 45%;
+  transform: translate(-50%,-50%);
 }
 
 .chat {
+  position: absolute;
+  left: 75%;
+  overflow-y: auto; 
+  height:600px;
   flex-basis: 17%;
   margin-right: 2%;
   overflow-y: auto; 
@@ -105,11 +125,13 @@ html {
 }
 
 .lowerSide {
+  position: absolute;
   margin-top: 25px;
   margin-right: 10px;
   display: flex;
-  justify-content: center;
-  flex-direction: row;
+  left: 50%;
+  top: 75%;
+  transform: translate(-50%);
 }
 
 .lineSizes {

@@ -32,9 +32,26 @@
       </tbody>
     </table> -->
 
-      <div id="canvasDiv">
+    <canvas id='canvas' width='800' height='600'></canvas>
+    <div id="canvasButtons" style="display: none;">
+      <button id="level1" class="button is-rounded" onclick="level1Click()" ></button>
+      <button id="level2" class="button is-rounded" onclick="level2Click()" ></button>
+      <button id="level3" class="button is-rounded" onclick="level3Click()" ></button>
+    </div>
+    <article class="message is-danger" id="moreUsersMessage">
+      <div class="message-header">
+        <p>More Users Are Needed To Start The Game</p>
+      </div>
+    </article>
+    <article class="message is-info" id="choosingWordsMessage">
+      <div class="message-header">
+        <p id="choosingWordsP"></p>
+      </div>
+    </article>
+
+      <!-- <div id="canvasDiv"> 
           <canvas id='canvas' width='800' height='600'></canvas>
-          <!-- <div id="canvasButtons" style="display: none;">
+          <div id="canvasButtons" style="display: none;">
             <button id="level1" class="button is-rounded" onclick="level1Click()" ></button>
             <button id="level2" class="button is-rounded" onclick="level2Click()" ></button>
             <button id="level3" class="button is-rounded" onclick="level3Click()" ></button>
@@ -48,17 +65,17 @@
             <div class="message-header">
               <p id="choosingWordsP"></p>
             </div>
-          </article> -->
-      </div>
+          </article>
+      </div>-->
 
        
 
       <div class="chat">
-        <!-- <article id="ogBody" class="message"></article>
+        <article id="ogBody" class="message"></article>
         <div class="chatInput">
           <input id="chatArea" class="input" type="text" placeholder="Text input" value="" onkeypress=sendMessage(event)>
           <button id="chatButton" class="button is-success is-rounded" onclick=sendMessage(69)>Enter</button>
-        </div> -->
+        </div>
       </div>
     </div>
     <div class="lowerSide"> 

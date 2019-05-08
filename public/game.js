@@ -10,8 +10,8 @@ var selfDrawData = [],
     clickDrag = [],
     playerData = {},
     self = {},
-    players = [],
     color = '#ff0000',
+    lineWidth = 5,
     playerCount = 0,
     i = 1
 
@@ -44,8 +44,8 @@ document.onmousemove = function (e) {
 
 function addClick (x, y, dragging) {
     if(self.turn & canDraw){
-        selfDrawData.push({dragging: dragging, x: x, y: y, color: color})
-        socket.emit('drawdata', {dragging: dragging, x: x, y: y, color: color})
+        selfDrawData.push({dragging: dragging, x: x, y: y, color: color, width: lineWidth})
+        socket.emit('drawdata', {dragging: dragging, x: x, y: y, color: color, width: lineWidth})
     }
 }
 
@@ -58,9 +58,9 @@ function checkTurn(){
     for(let id in playerData){
         let plr = playerData[id]
         //document.querySelector(`#${id} > td`).innerHTML = plr.points
-        document.getElementById(`${id}`).children[1].innerHTML = plr.points
+        //document.getElementById(`${id}`).children[1].innerHTML = plr.points
         if(plr.turn) {
-            document.getElementById(plr.id).style.backgroundColor = "#23d160"
+            //document.getElementById(plr.id).style.backgroundColor = "#23d160"
         } if(plr.choosingWord && id != socket.id){
             choosingOn(plr.name)
         }
@@ -73,6 +73,15 @@ function clearCanvas() {
 
 function changeStroke(stroke) {
     switch(stroke) {
+        case 'small':
+            lineWidth = 5
+            break;
+        case 'medium':
+            lineWidth = 10
+            break;
+        case 'large':
+            lineWidth = 15
+            break;
         case 'red':
             color = "#ff0000"
             break;
@@ -125,32 +134,32 @@ function addMessage(data){
 }
 
 function setPlayers() {
-    document.getElementById('hotBody').innerHTML = ''
+    // document.getElementById('hotBody').innerHTML = ''
 
-    let count = 1
-    for(let id in playerData){
-        let plr = playerData[id]
-        //document.getElementById(count).innerHTML = plr.name
-        var row = document.createElement("tr")
-        var head = document.createElement("th")
-        row.setAttribute("id", plr.id)
-        var data = document.createElement("td")
-        var node = document.createTextNode(plr.name);
-        var points = document.createTextNode("0")
-        data.appendChild(points)
-        head.appendChild(node)
-        row.appendChild(head)
-        row.appendChild(data)
-        document.getElementById('hotBody').appendChild(row)
-        count++
+    // let count = 1
+    // for(let id in playerData){
+    //     let plr = playerData[id]
+    //     //document.getElementById(count).innerHTML = plr.name
+    //     var row = document.createElement("tr")
+    //     var head = document.createElement("th")
+    //     row.setAttribute("id", plr.id)
+    //     var data = document.createElement("td")
+    //     var node = document.createTextNode(plr.name);
+    //     var points = document.createTextNode("0")
+    //     data.appendChild(points)
+    //     head.appendChild(node)
+    //     row.appendChild(head)
+    //     row.appendChild(data)
+    //     document.getElementById('hotBody').appendChild(row)
+    //     count++
 
 
-        var dataOne = document.createElement("td")
-        var dataTwo = document.createElement("td")
+    //     var dataOne = document.createElement("td")
+    //     var dataTwo = document.createElement("td")
         
 
-    }
-    if(document.getElementById('hotBody').childElementCount >= 2) {
+    // }
+    if(Object.keys(this.playerData).length >= 2) {
         document.getElementById('moreUsersMessage').style.display = "none"
     }
 }
@@ -287,11 +296,11 @@ function redraw() {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height) // Clears the canvas
 
     ctx.lineJoin = "round"
-    ctx.lineWidth = 5
 			
     for(var i=0; i < selfDrawData.length; i++) {		
         ctx.beginPath()
         ctx.strokeStyle = selfDrawData[i].color
+        ctx.lineWidth = selfDrawData[i].width
         if(selfDrawData[i].dragging && i)
             ctx.moveTo(selfDrawData[i-1].x, selfDrawData[i-1].y)
         else
@@ -308,6 +317,7 @@ function redraw() {
             for(let i=0; i<drawData.length; i++){
                 ctx.beginPath()
                 ctx.strokeStyle = drawData[i].color
+                ctx.lineWidth = drawData[i].width
                 if(drawData[i].dragging && i)
                     ctx.moveTo(drawData[i-1].x, drawData[i-1].y)   
                 else

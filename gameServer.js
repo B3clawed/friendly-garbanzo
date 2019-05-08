@@ -69,7 +69,7 @@ module.exports = class gameServer{
             socket.on('drawdata', (data) => {
                 if(this.players[socket.id].turn){
                     this.players[socket.id].drawData.push(data)
-                    socket.broadcast.emit('drawdata', {id: socket.id, dragging: data.dragging ? data.dragging : false, x: data.x, y: data.y, color: data.color})
+                    socket.broadcast.emit('drawdata', {id: socket.id, dragging: data.dragging ? data.dragging : false, x: data.x, y: data.y, color: data.color, width: data.width})
                 }
             })
         })
@@ -168,11 +168,13 @@ module.exports = class gameServer{
 
     startWordChoices(id){
         let socket = this.io.sockets.connected[id]
-        this.players[id].choosingWord = true
-        this.io.emit('playerdata', this.players)
-        this.currentWords = getRandomWords()
-        this.io.emit('clearcanvas')
-        socket.emit('wordChoices', {level1: this.currentWords[0], level2: this.currentWords[1], level3: this.currentWords[2]})
+        if(socket){
+            this.players[id].choosingWord = true
+            this.io.emit('playerdata', this.players)
+            this.currentWords = getRandomWords()
+            this.io.emit('clearcanvas')
+            socket.emit('wordChoices', {level1: this.currentWords[0], level2: this.currentWords[1], level3: this.currentWords[2]})
+        }
     }
 }
 

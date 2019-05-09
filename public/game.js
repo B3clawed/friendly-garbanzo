@@ -134,10 +134,10 @@ function addMessage(data){
 }
 
 function setPlayers() {
-    // document.getElementById('hotBody').innerHTML = ''
+    document.getElementById('hotBody').innerHTML = ''
 
     // let count = 1
-    // for(let id in playerData){
+   
     //      let plr = playerData[id]
     //      //document.getElementById(count).innerHTML = plr.name
     //      // var row = document.createElement("tr")
@@ -154,31 +154,33 @@ function setPlayers() {
     //     // document.getElementById('hotBody').appendChild(row)
     //     // count++
 
-
-    //     var row = document.createElement("tr")
+    for(let id in playerData) {
+        let plr = playerData[id]
+        var row = document.createElement("tr")
     
-    //     //image
-    //     var dataOne = document.createElement("td")
-    //     dataOne.setAttribute("rowspan", 2)
-    //     var span = document.createElement("span")
-    //     span.setAttribute("class", "icon is-small")
-    //     var i = document.createElement("i")
-    //     i.setAttribute("class", "fas fa-user fa-2x")
-    //     span.appendChild(i)
-    //     dataOne.appendChild(span)
+        //image
+        var dataOne = document.createElement("td")
+        // dataOne.setAttribute("rowspan", 2)
+        var span = document.createElement("span")
+        span.setAttribute("class", "icon is-small")
+        var i = document.createElement("i")
+        i.setAttribute("class", "fas fa-user fa-2x")
+        span.appendChild(i)
+        dataOne.appendChild(span)
 
-    //     //user
-    //     var dataTwo = document.createElement("td")
-    //     var text = ""+plr.name+"\n"+plr.points+""
-    //     var node = document.createTextNode(text)
-    //     dataTwo.appendChild(node)
+        //user
+        var dataTwo = document.createElement("td")
+        var plrName = document.createTextNode(plr.name)
+        var br = document.createElement("br")
+        var plrPoints = document.createTextNode("Points: " + plr.points)
+        dataTwo.appendChild(plrName)
+        dataTwo.appendChild(br)
+        dataTwo.appendChild(plrPoints)
 
-    //     row.appendChild(dataOne)
-    //     row.appendChild(dataTwo)
-    //     document.getElementById('hotBody').appendChild(row)
-
-
-    // }
+        row.appendChild(dataOne)
+        row.appendChild(dataTwo)
+        document.getElementById('hotBody').appendChild(row)
+    }
     if(Object.keys(this.playerData).length >= 2) {
         document.getElementById('moreUsersMessage').style.display = "none"
     }
@@ -214,7 +216,7 @@ function connect(e) {
         var name = document.getElementById("userNameInput").value
         document.getElementById("userNameInput").value = ""
 
-        socket = io.connect('http://10.195.75.84:80')
+        socket = io.connect('http://127.0.0.1:80')
         socket.emit('login', {name: name})
 
         socket.on('drawdata', (data) => {

@@ -52,19 +52,13 @@ html, body {
 
  table td {
    text-align: center;
+   width: 110px;
  }
 
  .table td {
    vertical-align: bottom;
  }
 
-#canvasDiv {
-  /* width: 800px;
-  height: 600px;
-  position: relative;
-  display: flex;
-  justify-content: center; */
-}
 
  #canvas {
   border-style: solid;
@@ -79,7 +73,10 @@ html, body {
 
 #moreUsersMessage {
   margin: auto;
-  display: none;
+  position: absolute;
+  left: 50%;
+	top: 45%;
+  transform: translate(-50%,-50%);
 }
 
 #choosingWordsMessage {

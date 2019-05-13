@@ -13,6 +13,7 @@ var selfDrawData = [],
     color = '#ff0000',
     lineWidth = 5,
     playerCount = 0,
+    timer,
     i = 1
 
 canvas.onmousedown = function(e) {
@@ -250,7 +251,7 @@ function connect(e) {
         socket.on('startturn', (data) => {
             console.log(data)
             document.getElementById("choosingWordsMessage").style.display = "none"
-            startTimer(30)
+            startTimer(30-(Date.now()-data.time))
             document.getElementById("underscore").innerText = data.word
         })
 
@@ -267,33 +268,31 @@ function connect(e) {
 }
 
 function startTimer(time) {
+    clearInterval(timer)
     document.getElementById("countdowntimer").style.visibility = "visible"
     document.getElementById("underscore").style.visibility = "visible"
     var timeleft = time
-    var downloadTimer = setInterval(function(){
-    timeleft--
-    document.getElementById("countdowntimer").textContent = timeleft
-    if(timeleft <= 0)
-        clearInterval(downloadTimer)
+    timer = setInterval(function(){
+        timeleft--
+        document.getElementById("countdowntimer").textContent = timeleft
+        if(timeleft <= 0)
+            clearInterval(timer)
     },1000)
 }
 
 function level1Click(){
     socket.emit('chooseword', {level: 0})
     wordChoicesOff()
-    startTimer(30)
 }
 
 function level2Click(){
     socket.emit('chooseword', {level: 1})
     wordChoicesOff()
-    startTimer(30)
 }
 
 function level3Click(){
     socket.emit('chooseword', {level: 2})
     wordChoicesOff()
-    startTimer(30)
 }
 
 function changeWidth() {

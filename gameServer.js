@@ -8,6 +8,7 @@ module.exports = class gameServer{
             timer: 30,
             word: '',
             turnIdx: 0,
+            turnStart: 0,
             guessedCount: 0
         }
         this.players = {}
@@ -94,7 +95,8 @@ module.exports = class gameServer{
         let plr = this.players[socket.id]
         console.log(`${plr.name}'s turn start.`)
         this.gameSettings.word = this.currentWords[level]
-        this.io.emit('startturn', {id: socket.id, word: toUnderscores(this.gameSettings.word)})
+        this.gameSettings.turnStart = Date.now()
+        this.io.emit('startturn', {id: socket.id, word: toUnderscores(this.gameSettings.word), time: this.gameSettings.turnStart})
         this.gameSettings.currentTurn = socket.id
         plr.choosingWord = false
         let thisCount = ++plr.turnCount

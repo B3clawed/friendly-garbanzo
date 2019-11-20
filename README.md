@@ -1,2 +1,2 @@
 # friendly-garbanzo
-Once upon a time, a garbanzo bean was friendly. The end.
+A real time multiplayer pictionary game based on Node.js and Express
